@@ -1,19 +1,28 @@
-#include "mainwindow.h"
-#include "mediavector.h"
-#include <iostream>
 #include <QApplication>
+#include "View/mainwindow.h"
+#include "Controller/controller.h"
 
-using namespace std;
+//Test Paths
+//C:/Users/marco/Downloads/Adrenalize - Wherever The Light Ends.mp3
+//C:/Users/marco/Downloads/NDR8  SKYTTERS  Im In Love.mp3
+//C:/Users/marco/Downloads/Pink Floyd - Wish You Were Here.mp3
+//C:/Users/marco/Downloads/Bassjackers & KSHMR ft Sidnie Tipton - Extreme.mp3
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
-//    return a.exec();
+    QApplication a(argc, argv);
+    //a.setStyleSheet("QWidget{background-color: rgb(70,70,70)} QPushButton{background:transparent} QLabel{color: white}");
+    MainWindow w;
+    Controller c;
 
-    MediaVector m;
+    w.setController(&c);
+    c.setView(&w);
 
-    cout<<m.getSize()<<endl;
+    w.resize(1200,700);
+    w.show();
+
+    a.setWindowIcon(QIcon(":resources/resources/QVisualizerIcon.png"));
+
+    return a.exec();
 
 }
