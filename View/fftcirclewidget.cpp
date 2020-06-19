@@ -3,7 +3,7 @@
 FFTCircleWidget::FFTCircleWidget()
 {
     m_radiuses.reserve(2048);
-    painter = new QPainter(this);
+    painter = new QPainter();
     pen = new QPen();
 }
 
@@ -25,7 +25,7 @@ void FFTCircleWidget::paintGL()
 {
     makeCurrent();
 
-    painter->begin(this);
+    painter-> begin(this);
     painter-> setRenderHint(QPainter::HighQualityAntialiasing);
 
     unsigned int k = 0;

@@ -9,6 +9,8 @@
 #include <QComboBox>
 #include <QAudioRecorder>
 
+#include <fstream>
+
 #include "Model/soundwave.h"
 #include "Model/fft.h"
 #include "Model/fftbars.h"
@@ -55,6 +57,8 @@ public:
     void setView(MainWindow* );
 
 signals:
+    void outOfRangeTimer();
+    void formatNotValid();
     void replacePoints(std::vector<double>);
     void updateSoundWaveBufferSize(int);
     void sendHeights(std::vector<double>);
@@ -71,6 +75,7 @@ signals:
     void paletteChanged(float, float, float, float, float, float);
     void changeIncrementSpeed(float, float, float);
     void updateArtistInWidget(std::string);
+    void fileDoesNotExist();
 
 public slots:
     void onSetupButtonPressed();

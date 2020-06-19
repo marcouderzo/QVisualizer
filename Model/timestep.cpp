@@ -7,6 +7,8 @@ TimeStep::TimeStep()
 
 void TimeStep::setTimeStep(unsigned int i)
 {
+    if(i<10 || i>100)
+        throw Exceptions::OutOfRangeTimerValue();
     ms=i;
 }
 

@@ -12,6 +12,7 @@
 #include <QStackedWidget>
 #include <QWidget>
 #include <QLabel>
+#include <QMessageBox>
 
 #include <QMediaPlayer>
 
@@ -35,7 +36,6 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     void setController(Controller*);
-    ~MainWindow();
 
 private:
 
@@ -180,6 +180,9 @@ public slots:
     void onSwapMediaButtonPressed();
     void onPaletteSliderMoved();
     void onApplyRGBIncrementButtonClicked();
+    void onFormatNotValid();
+    void onOutOfRangeTimer();
+    void onFileDoesNotExist();
 
 private slots:
 

@@ -322,6 +322,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(endRedValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endGreenValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endBlueValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
+
 }
 
 void MainWindow::identifyButton()
@@ -366,6 +367,9 @@ void MainWindow::setController(Controller* ctrl)
     connect(c, SIGNAL(paletteChanged(float,float,float,float,float,float)), m_OvertimeFFTWidget, SLOT(onPaletteChanged(float,float,float,float,float,float)));
     connect(this, SIGNAL(changeIncrementSpeed(float, float, float)), c, SLOT(onChangeIncrementSpeed(float, float, float)));
     connect(this, SIGNAL(sendIncrementSpeed(float, float, float)), m_OvertimeFFTWidget, SLOT(onIncrementSpeedChanged(float, float, float)));
+    connect(c, SIGNAL(outOfRangeTimer()), this, SLOT(onOutOfRangeTimer()));
+    connect(c, SIGNAL(formatNotValid()), this, SLOT(onFormatNotValid()));
+    connect(c, SIGNAL(fileDoesNotExist()), this, SLOT(onFileDoesNotExist()));
 }
 
 void MainWindow::onSoundWaveButtonClicked(bool checked)
@@ -449,7 +453,7 @@ void MainWindow::onNextButtonPressed()
 
 void MainWindow::onUpdateCurrentRow(unsigned int index)
 {
-    mediaList->setCurrentRow(index);
+    mediaList->setCurrentRow(static_cast<int>(index));
 }
 
 void MainWindow::onPositionChanged(qint64 t)
@@ -503,5 +507,23 @@ void MainWindow::onApplyRGBIncrementButtonClicked()
     emit changeIncrementSpeed(r_increment, g_increment, b_increment);
 }
 
+void MainWindow::onFormatNotValid()
+{
+    QMessageBox msgBox;
+    msgBox.critical(nullptr, "Error", "Format not valid");
+    msgBox.setFixedSize(500,200);
+}
 
-MainWindow::~MainWindow(){}
+void MainWindow::onOutOfRangeTimer()
+{
+    QMessageBox msgBox;
+    msgBox.critical(nullptr, "Error", "Out of range timer");
+    msgBox.setFixedSize(500,200);
+}
+
+void MainWindow::onFileDoesNotExist()
+{
+    QMessageBox msgBox;
+    msgBox.critical(nullptr, "Error", "File does not exist");
+    msgBox.setFixedSize(500,200);
+}

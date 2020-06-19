@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <vector>
+#include "exceptions.h"
 
 class TimeStep
 {

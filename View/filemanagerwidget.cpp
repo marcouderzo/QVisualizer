@@ -1,5 +1,6 @@
 #include "View/filemanagerwidget.h"
 #include "Controller/controller.h"
+#include "exceptions.h"
 
 FileManagerWidget::FileManagerWidget()
 {

@@ -44,12 +44,11 @@ void MediaVector::pop(unsigned int index)
         {
             *(paths + i) = *(paths + i + 1);
         }
-        delete (paths[numberOfElements]);
-        paths[numberOfElements] = nullptr;
+        delete (paths[numberOfElements - 1]);
+        paths[numberOfElements - 1] = nullptr;
         numberOfElements--;
-     }
+     }    
 }
-
 
 FileAudio* MediaVector::operator [] (unsigned int i) const
 {
@@ -68,6 +67,9 @@ void MediaVector::push(FileAudio* s)
 
 void MediaVector::swap(unsigned int i, unsigned int j)
 {
+    if(i >= numberOfElements || j >= numberOfElements){
+        return;
+    }
     FileAudio* aux = paths[i];
     paths[i] = paths[j];
     paths[j] = aux;

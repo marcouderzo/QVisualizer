@@ -7,7 +7,6 @@ class WAVFile : public FileAudio
 {
 public:
     WAVFile(const std::string&);
-
     virtual FileAudio* clone() const override;
     void setTitle(const std::string&) override;
     std::string getTitle() const override;

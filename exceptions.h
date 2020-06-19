@@ -1,14 +1,12 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 
+#include<exception>
 
-class Exceptions
+class Exceptions : public std::exception
 {
 public:
-    Exceptions();
 
-    class UnsupportedFormat {};
-    class MediaLoadingError {};
     class OutOfRangeTimerValue {};
 
 };

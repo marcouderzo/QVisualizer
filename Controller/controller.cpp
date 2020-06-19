@@ -11,8 +11,6 @@ Controller::Controller()
 
     auxMediaPlayer = new QMediaPlayer();
 
-
-
     connect(auxMediaPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(setMetaData(QMediaPlayer::MediaStatus)));
 
     connect(m_QMediaPlayer, SIGNAL(positionChanged(qint64)), this, SIGNAL(positionChanged(qint64)));
@@ -132,9 +130,10 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             file=new FLACFile(helperFilePath);
         else if(helperFilePath.find(".aac")!= std::string::npos)
             file= new AACFile(helperFilePath);
-        else
-            throw Exceptions::UnsupportedFormat();
-
+        else{
+            emit formatNotValid();
+            return;
+        }
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
         for(auto el : availableMetaData)
@@ -171,12 +170,15 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 
 void Controller::onSendToMediaVector(const std::string& s)
 {
-    auxMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(s.c_str())));
-    if(auxMediaPlayer->error()==QMediaPlayer::ResourceError)
+    std::ifstream file(s.c_str());
+
+    if(file.fail())
     {
-        qDebug()<<"Media could not get loaded!";//////////////////////////////////////////////////////////////////////////////////////////
+        emit fileDoesNotExist();
         return;
     }
+
+    auxMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(s.c_str())));
     helperFilePath = s;
 }
 
@@ -202,13 +204,14 @@ void Controller::onOvertimeFFTSmoothingAmtChanged(int id)
 
 void Controller::onUpdateOvertimeFFTTimer(unsigned int ms)
 {
-    if(ms<10 || ms >100)
-    {
-        qDebug()<<"Out of Range Value!"; ////////////////////////////////////////////////////////////////////////////////////////////
-
-        return;
-    }
-    m_OvertimeFFT->setTimeStep(ms);
+   try
+   {
+        m_OvertimeFFT->setTimeStep(ms);
+   }
+   catch(Exceptions::OutOfRangeTimerValue)
+   {
+        emit outOfRangeTimer();
+   }
 }
 
 void Controller::onMediaListItemDoubleClicked(unsigned int index)
@@ -253,7 +256,6 @@ void Controller::onNextButtonPressed(unsigned int current)
     m_QMediaPlayer->stop();
     if(m_mediaVector[current+1]==nullptr)
     {
-        qDebug()<<"No next Media, current+1 is nullptr";/////////////////////////////////////////////////////////////////////////////////////////////
         return;
     }
 
@@ -281,9 +283,9 @@ void Controller::onVolumeChanged(int volume)
 
 void Controller::onRemoveMediaButtonPressed(unsigned int index)
 {
-    qDebug()<< QString(m_mediaVector[index]->getTitle().c_str());
-    qDebug()<< "index passed is = " << index;
-    m_mediaVector.pop(index);
+//    qDebug()<< QString(m_mediaVector[index]->getTitle().c_str());
+//    qDebug()<< "index passed is = " << index;
+     m_mediaVector.pop(index);
 }
 
 void Controller::onSwapMediaButtonPressed(unsigned int index)
