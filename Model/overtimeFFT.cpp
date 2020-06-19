@@ -3,7 +3,7 @@
 OvertimeFFT::OvertimeFFT()
 {
     smoothing=0;
-    smoothLimit = timeBuffer.size();
+    smoothLimit = 0;
 }
 
 void OvertimeFFT::tick(std::vector<double> vect)

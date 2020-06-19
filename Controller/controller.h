@@ -76,6 +76,7 @@ signals:
     void changeIncrementSpeed(float, float, float);
     void updateArtistInWidget(std::string);
     void fileDoesNotExist();
+    void updateProperties(std::string, std::string, std::string, bool);
 
 public slots:
     void onSetupButtonPressed();

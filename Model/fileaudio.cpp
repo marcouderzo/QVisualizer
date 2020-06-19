@@ -25,7 +25,7 @@ void FileAudio::setDuration(unsigned int i)
     duration=i;
 }
 
-/*bool FileAudio::isLossless() const
+bool FileAudio::isLossless() const
 {
     return false;
-}*/
+}

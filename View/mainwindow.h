@@ -26,6 +26,7 @@
 #include "overtimefftwidget.h"
 #include "metadatawidget.h"
 #include "filemanagerwidget.h"
+#include "mediapropertieswidget.h"
 
 class Controller;
 
@@ -46,6 +47,7 @@ private:
     FFTCircleWidget* m_FFTCircleWidget;
     MetaDataWidget* m_MetaDataWidget;
     FileManagerWidget* m_FileManagerWidget;
+    MediaPropertiesWidget* m_MediaPropertiesWidget;
     QListWidget* mediaList;
 
     //layout
@@ -67,6 +69,7 @@ private:
     QSlider* volumeSlider;
     QPushButton* swapButton;
     QPushButton* removeButton;
+    QPushButton* propertiesButton;
 
 
     //SoundWave Settings
@@ -140,7 +143,6 @@ signals:
     void sendHeights(std::vector<double>);
     void sendRadiuses(std::vector<double>);
     void replacePoints(std::vector<double>);
-    void updateSoundWaveBufferSize(unsigned int);
     void sendBuffers(std::vector<double>,  std::vector<std::vector<double>>);
     void sendToMediaVector(std::string);
     void updateOvertimeFFTTimer(unsigned int);
@@ -158,6 +160,7 @@ signals:
     void sendPalette(float,float,float,float,float,float);
     void changeIncrementSpeed(float, float, float);
     void sendIncrementSpeed(float, float, float);
+    void updateProperties(std::string, std::string, std::string, bool);
 
 public slots:
 
@@ -183,6 +186,7 @@ public slots:
     void onFormatNotValid();
     void onOutOfRangeTimer();
     void onFileDoesNotExist();
+    void onPropertiesButtonClicked();
 
 private slots:
 

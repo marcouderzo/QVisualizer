@@ -2,8 +2,7 @@
 
 SoundWaveWidget::SoundWaveWidget()
 {
-    bufferSize = 2304;
-    m_wave.reserve(bufferSize);
+    m_wave.reserve(2304);
 }
 
 void SoundWaveWidget::initializeGL()
@@ -23,7 +22,7 @@ void SoundWaveWidget::paintGL()
     for(unsigned int i=0; i<3840; i++)
     {
         glVertex2d(-1+xOffset, m_wave[i]);
-        xOffset+=2.0/static_cast<double>(bufferSize);
+        xOffset+=2.0/static_cast<double>(m_wave.size());
         glVertex2d(-1+xOffset, m_wave[i+1]);
     }
     glEnd();
@@ -46,10 +45,4 @@ void SoundWaveWidget::onSendWaveEvent(const std::vector<double>& vect)
     for(auto el : vect)
         m_wave.push_back(el);
     update();
-}
-
-void SoundWaveWidget::onUpdateSoundWaveBufferSize(unsigned int size)
-{
-    if(size != bufferSize)
-        bufferSize = size;
 }

@@ -20,7 +20,7 @@ public:
     unsigned int getDuration() const;
     void setFilePath(const std::string&);
     void setDuration(unsigned int);
-    //virtual bool isLossless() const;
+    virtual bool isLossless() const;
     virtual void setTitle(const std::string&) = 0 ;
     virtual void setArtist(const std::string&) = 0;
     virtual void setAlbum(const std::string&) = 0;

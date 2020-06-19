@@ -21,13 +21,13 @@ SOURCES += \
     Controller\controller.cpp \
     Model\fft.cpp \
     Model\fftbars.cpp \
+    View/mediapropertieswidget.cpp \
     View\fftbarswidget.cpp \
     Model\fftcircle.cpp \
     View\fftcirclewidget.cpp \
     Model\fileaudio.cpp \
     View\filemanagerwidget.cpp \
     Model\flacfile.cpp \
-    exceptions.cpp \
     main.cpp \
     View\mainwindow.cpp \
     mediavector.cpp \
@@ -46,6 +46,7 @@ HEADERS += \
     Controller\controller.h \
     Model\fft.h \
     Model\fftbars.h \
+    View/mediapropertieswidget.h \
     View\fftbarswidget.h \
     Model\fftcircle.h \
     View\fftcirclewidget.h \

@@ -12,6 +12,7 @@ public:
     std::string getTitle() const override;
     std::string getArtist() const override;
     std::string getAlbum() const override;
+    bool isLossless() const override;
     void setCoverArt(const QImage&) override;
     QImage getCoverArt()const override;
     void setArtist(const std::string&) override;

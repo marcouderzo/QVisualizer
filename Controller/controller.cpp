@@ -79,7 +79,6 @@ void Controller::setView(MainWindow* wi)
 {
     w = wi;
     connect(this, SIGNAL(replacePoints(std::vector<double>)), w, SIGNAL(replacePoints(std::vector<double>)));
-    //connect(this, SIGNAL(updateSoundWaveBufferSize(int)), w, SIGNAL(updateSoundWaveBufferSize(int)));
     connect(this, SIGNAL(sendHeights(std::vector<double>)), w, SIGNAL(sendHeights(std::vector<double>)));
     connect(this, SIGNAL(sendRadiuses(std::vector<double>)), w, SIGNAL(sendRadiuses(std::vector<double>)));
     connect(this, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)), w, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)));
@@ -94,6 +93,7 @@ void Controller::setView(MainWindow* wi)
     connect(this, SIGNAL(changeIncrementSpeed(float, float, float)), w, SIGNAL(sendIncrementSpeed(float, float, float)));
     connect(w, SIGNAL(removeMedia(unsigned int)), this, SLOT(onRemoveMediaButtonPressed(unsigned int)));
     connect(w, SIGNAL(swapMedia(unsigned int)), this, SLOT(onSwapMediaButtonPressed(unsigned int)));
+    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), w, SIGNAL(updateProperties(std::string, std::string, std::string, bool)));
 }
 
 void Controller::onSetupButtonPressed()
@@ -223,6 +223,8 @@ void Controller::onMediaListItemDoubleClicked(unsigned int index)
    emit updateArtistInWidget(file->getArtist());
    emit updateImageInWidget(file->getCoverArt());
    emit updateProgSliderRange(file->getDuration()/1000);
+
+   emit updateProperties(file->getTitle(), file->getArtist(), file->getAlbum(), file->isLossless());
 }
 
 void Controller::onPlayButtonPressed()
@@ -272,8 +274,7 @@ void Controller::onNextButtonPressed(unsigned int current)
 
 void Controller::onOvertimeFFTAlphaBlendingChanged(int amt)
 {
-    float aux = 100;
-    emit updateOvertimeFFTAlphaBlending(amt/aux);
+    emit updateOvertimeFFTAlphaBlending(amt/100.0f);
 }
 
 void Controller::onVolumeChanged(int volume)

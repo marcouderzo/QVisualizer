@@ -22,6 +22,11 @@ std::string WAVFile::getAlbum() const
     return album;
 }
 
+bool WAVFile::isLossless() const
+{
+    return true;
+}
+
 void WAVFile::setCoverArt(const QImage & image)
 {
     coverArt=image;

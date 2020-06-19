@@ -23,6 +23,11 @@ std::string FLACFile::getAlbum() const
     return album;
 }
 
+bool FLACFile::isLossless() const
+{
+    return true;
+}
+
 void FLACFile::setCoverArt(const QImage & image)
 {
     coverArt = image;

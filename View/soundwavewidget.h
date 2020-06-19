@@ -18,11 +18,9 @@ protected:
 
 private:
     std::vector<double> m_wave;
-    unsigned int bufferSize;
 
 public slots:
      void onSendWaveEvent(const std::vector<double>&);
-     void onUpdateSoundWaveBufferSize(unsigned int);
 
 };
 

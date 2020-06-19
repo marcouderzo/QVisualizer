@@ -23,6 +23,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_FileManagerWidget = new FileManagerWidget();
     m_FileManagerWidget->setController(c);
 
+    m_MediaPropertiesWidget = new MediaPropertiesWidget();
+    m_MediaPropertiesWidget->setController(c);
+    m_MediaPropertiesWidget->hide();
+
     groupBox = new QGroupBox();
 
     setupButton = new QPushButton("Use SoundCard Input");
@@ -52,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     swapButton = new QPushButton("Swap Selected With Next");
     removeButton = new QPushButton("Remove Selected From List");
+    propertiesButton = new QPushButton("Show Current Item's MetaData ");
 
     // MainWindow Labels
 
@@ -262,6 +267,7 @@ MainWindow::MainWindow(QWidget *parent)
     controlsLayout->addWidget(volumeSlider);
     controlsLayout->addWidget(swapButton);
     controlsLayout->addWidget(removeButton);
+    controlsLayout->addWidget(propertiesButton);
     controlsLayout->addWidget(mediaList);
     controlsLayout->addWidget(SoundWaveButton);
     controlsLayout->addWidget(soundWaveSettingsPlaceHolder);
@@ -294,11 +300,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(OvertimeFFTButton, SIGNAL(toggled(bool)), this, SLOT(identifyButton()));
 
     connect(this, SIGNAL(replacePoints(std::vector<double>)), m_soundWaveWidget, SLOT(onSendWaveEvent(const std::vector<double>&)));
-    connect(this, SIGNAL(updateSoundWaveBufferSize(unsigned int)), m_soundWaveWidget, SLOT(onUpdateSoundWaveBufferSize(unsigned int)));
     connect(this, SIGNAL(sendHeights(std::vector<double>)), m_FFTBarsWidget, SLOT(onSendHeightsEvent(const std::vector<double>&)));
     connect(this, SIGNAL(sendRadiuses(std::vector<double>)), m_FFTCircleWidget, SLOT(onSendRadiusesEvent(const std::vector<double>&)));
     connect(this, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)), m_OvertimeFFTWidget, SLOT(onSendBuffersEvent(const std::vector<double>&,  const std::vector<std::vector<double>>&)));
     connect(m_FileManagerWidget, SIGNAL(sendToMediaVector(std::string)), this, SIGNAL(sendToMediaVector(std::string)));
+
+
+    connect(propertiesButton, SIGNAL(clicked()), this, SLOT(onPropertiesButtonClicked()));
+    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), m_MediaPropertiesWidget, SLOT(onUpdateProperties(std::string, std::string, std::string, bool)));
 
     connect(this, SIGNAL(updateTitleInWidget(std::string)), m_MetaDataWidget, SLOT(onUpdateTitleInWidget(const std::string&)));
     connect(this, SIGNAL(updateImageInWidget(const QImage&)), m_MetaDataWidget, SLOT(onUpdateImageInWidget(const QImage&)));
@@ -322,6 +331,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(endRedValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endGreenValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endBlueValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
+
 
 }
 
@@ -370,6 +380,7 @@ void MainWindow::setController(Controller* ctrl)
     connect(c, SIGNAL(outOfRangeTimer()), this, SLOT(onOutOfRangeTimer()));
     connect(c, SIGNAL(formatNotValid()), this, SLOT(onFormatNotValid()));
     connect(c, SIGNAL(fileDoesNotExist()), this, SLOT(onFileDoesNotExist()));
+
 }
 
 void MainWindow::onSoundWaveButtonClicked(bool checked)
@@ -526,4 +537,9 @@ void MainWindow::onFileDoesNotExist()
     QMessageBox msgBox;
     msgBox.critical(nullptr, "Error", "File does not exist");
     msgBox.setFixedSize(500,200);
+}
+
+void MainWindow::onPropertiesButtonClicked()
+{
+    m_MediaPropertiesWidget->show();
 }
