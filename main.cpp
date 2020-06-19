@@ -1,4 +1,6 @@
 #include <QApplication>
+#include <QFile>
+
 #include "View/mainwindow.h"
 #include "Controller/controller.h"
 
@@ -11,12 +13,19 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //a.setStyleSheet("QWidget{background-color: rgb(70,70,70)} QPushButton{background:transparent} QLabel{color: white}");
+
     MainWindow w;
     Controller c;
 
     w.setController(&c);
     c.setView(&w);
+
+    /*
+    QFile File(":resources/resources/stylesheet.css");
+    File.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(File.readAll());
+    a.setStyleSheet(styleSheet);
+    */
 
     w.resize(1200,700);
     w.show();

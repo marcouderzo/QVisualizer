@@ -21,6 +21,8 @@
 #include "Model/aacfile.h"
 #include "mediavector.h"
 
+#include "exceptions.h"
+
 class MainWindow;
 
 class Controller : public QObject

@@ -6,5 +6,6 @@
         <file>resources/playIcon.png</file>
         <file>resources/previousIcon.png</file>
         <file>resources/QVisualizerIcon.png</file>
+        <file>resources/stylesheet.css</file>
     </qresource>
 </RCC>

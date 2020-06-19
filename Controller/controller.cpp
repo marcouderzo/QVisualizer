@@ -133,10 +133,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         else if(helperFilePath.find(".aac")!= std::string::npos)
             file= new AACFile(helperFilePath);
         else
-        {
-            qDebug()<< "Unsupported format!";
-            return;
-        }
+            throw Exceptions::UnsupportedFormat();
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
@@ -208,6 +205,7 @@ void Controller::onUpdateOvertimeFFTTimer(unsigned int ms)
     if(ms<10 || ms >100)
     {
         qDebug()<<"Out of Range Value!"; ////////////////////////////////////////////////////////////////////////////////////////////
+
         return;
     }
     m_OvertimeFFT->setTimeStep(ms);
