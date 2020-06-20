@@ -5,7 +5,7 @@ MetaDataWidget::MetaDataWidget()
     painter = new QPainter();
     coverArt =  QImage(QVisualizerLogo);
     title = "Welcome to QVisualizer!";
-    artist = "";
+    artist = "Real-Time Music Visualization App";
 }
 
 void MetaDataWidget::initializeGL()
@@ -43,7 +43,7 @@ void MetaDataWidget::paintGL()
 
     painter->drawImage(QRect(10, 30, x, y), coverArt, coverArt.rect());
 
-    double factor = titleRect.width() / painter->fontMetrics().width(QString::fromUtf8(title.c_str())); //from stdstring
+    double factor = titleRect.width() / painter->fontMetrics().horizontalAdvance(title.c_str());
     if ((factor < 1) || (factor > 1.25))
     {
         QFont f = painter->font();
@@ -58,14 +58,14 @@ void MetaDataWidget::paintGL()
     }
 
     painter->setPen(Qt::white);
-    painter->drawText(x+20, 100, QString::fromUtf8(title.c_str()));
+    painter->drawText(x+20, 100, title.c_str());
     QFont f = painter->font();
-    if(f.pointSizeF()-10 > 0)
-        f.setPointSizeF(f.pointSizeF()-10);
+    if(f.pointSizeF()-17 > 0)
+        f.setPointSizeF(f.pointSizeF()-17);
     painter->setFont(f);
 
     if(artist!="")
-        painter->drawText(x+20, 170, QString::fromUtf8(artist.c_str()));
+        painter->drawText(x+20, 160, artist.c_str());
     painter->end();
 }
 
@@ -89,6 +89,14 @@ void MetaDataWidget::onUpdateArtistInWidget(const std::string& a)
 {
     if(a!="")
         artist=a;
+    update();
+}
+
+void MetaDataWidget::onSetDefaultEvent()
+{
+    title = "No Media Selected.";
+    artist = "QVisualizer is Now Idling...";
+    coverArt = QImage(QVisualizerLogo);
     update();
 }
 

@@ -26,6 +26,7 @@ public slots:
     void onUpdateTitleInWidget(const std::string&);
     void onUpdateImageInWidget(const QImage&);
     void onUpdateArtistInWidget(const std::string&);
+    void onSetDefaultEvent();
 
 private:
     QImage coverArt;

@@ -77,6 +77,7 @@ signals:
     void updateArtistInWidget(std::string);
     void fileDoesNotExist();
     void updateProperties(std::string, std::string, std::string, bool);
+    void setDefault();
 
 public slots:
     void onSetupButtonPressed();

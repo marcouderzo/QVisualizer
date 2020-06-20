@@ -39,7 +39,6 @@ void Controller::setId(int b)
 //https://doc.qt.io/archives/qt-5.6/qtmultimedia-multimedia-audiorecorder-audiorecorder-cpp.html
 qreal Controller::getPeakValue(const QAudioFormat &format)
 {
-    //qDebug()<<format.sampleType() << format.sampleSize();
     // Note: Only the most common sample formats are supported
     if (!format.isValid())
         return qreal(0);
@@ -247,6 +246,7 @@ void Controller::onPauseButtonPressed()
 void Controller::onPrevButtonPressed(unsigned int current)
 {
     m_QMediaPlayer->stop();
+    if(m_mediaVector.getSize() == 0) return;
     if(m_mediaVector[current-1]==nullptr) return;
 
     FileAudio* file = m_mediaVector[current-1];
@@ -263,10 +263,10 @@ void Controller::onPrevButtonPressed(unsigned int current)
 void Controller::onNextButtonPressed(unsigned int current)
 {
     m_QMediaPlayer->stop();
-    if(m_mediaVector[current+1]==nullptr)
-    {
-        return;
-    }
+
+    if(m_mediaVector.getSize() == 0) return;
+    if(m_mediaVector[current+1]==nullptr) return;
+
 
     FileAudio* file = m_mediaVector[current+1];
 
@@ -294,12 +294,20 @@ void Controller::onRemoveMediaButtonPressed(unsigned int index)
     if(m_mediaVector.getSize() == 0 ) return;
 
     std::string aux = m_QMediaPlayer->currentMedia().canonicalUrl().toString().toStdString();
-    aux.erase(0, 7);
+
+    #ifdef Q_OS_WIN
+        aux.erase(0, 8);
+    #endif
+
+    #ifdef Q_OS_UNIX
+        aux.erase(0, 7);
+    #endif
 
     if(aux == m_mediaVector[index]->getFilePath())
     {
         m_QMediaPlayer->stop();
         m_QMediaPlayer->setMedia(nullptr);
+        emit setDefault();
     }
 
     m_mediaVector.pop(index);

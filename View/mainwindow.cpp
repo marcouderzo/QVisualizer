@@ -380,6 +380,9 @@ void MainWindow::setController(Controller* ctrl)
     connect(c, SIGNAL(formatNotValid()), this, SLOT(onFormatNotValid()));
     connect(c, SIGNAL(fileDoesNotExist()), this, SLOT(onFileDoesNotExist()));
 
+    connect(c, SIGNAL(setDefault()), m_MetaDataWidget, SLOT(onSetDefaultEvent()));
+    connect(c, SIGNAL(setDefault()), m_MediaPropertiesWidget, SLOT(onSetDefaultEvent()));
+
 }
 
 void MainWindow::onSoundWaveButtonClicked(bool checked)

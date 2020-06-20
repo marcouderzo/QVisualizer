@@ -10,6 +10,10 @@ MediaPropertiesWidget::MediaPropertiesWidget()
     QLabel* albumLabel= new QLabel("Album: ");
     QLabel* losslessLabel= new QLabel("Lossless: ");
 
+    m_title.setText("No Media Selected");
+    m_artist.setText("No Media Selected");
+    m_album.setText("No Media Selected");
+    m_lossless.setText("No Media Selected");
 
     layout->addWidget(titleLabel,0,0);
     layout->addWidget(&m_title,0,1);
@@ -47,4 +51,12 @@ void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const s
          m_lossless.setText("True");
      else
          m_lossless.setText("False");
+}
+
+void MediaPropertiesWidget::onSetDefaultEvent()
+{
+    m_title.setText("No Media Selected");
+    m_artist.setText("No Media Selected");
+    m_album.setText("No Media Selected");
+    m_lossless.setText("No Media Selected");
 }

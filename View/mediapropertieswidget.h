@@ -26,6 +26,7 @@ private:
 public slots:
 
     void onUpdateProperties(const std::string&, const std::string&, const std::string&, bool);
+    void onSetDefaultEvent();
 
 };
 
