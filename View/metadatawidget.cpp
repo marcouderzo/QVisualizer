@@ -5,7 +5,7 @@ MetaDataWidget::MetaDataWidget()
     painter = new QPainter();
     coverArt =  QImage(QVisualizerLogo);
     title = "Welcome to QVisualizer!";
-    artist = "Real-Time Music Visualization App";
+    artist = "";
 }
 
 void MetaDataWidget::initializeGL()
@@ -94,8 +94,7 @@ void MetaDataWidget::onUpdateArtistInWidget(const std::string& a)
 
 void MetaDataWidget::onSetDefaultEvent()
 {
-    title = "No Media Selected.";
-    artist = "QVisualizer is Now Idling...";
+    title = "No Media Selected.";;
     coverArt = QImage(QVisualizerLogo);
     update();
 }

@@ -28,8 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     groupBox = new QGroupBox();
 
-    setupButton = new QPushButton("Use SoundCard Input");
-
     SoundWaveButton = new QRadioButton("SoundWave");
     FFTBarsButton = new QRadioButton("FFTBars");
     FFTCircleButton = new QRadioButton("FFTCircle");
@@ -53,9 +51,16 @@ MainWindow::MainWindow(QWidget *parent)
     volumeSlider->setRange(0,100);
     volumeSlider->setSliderPosition(60);
 
-    swapButton = new QPushButton("Swap Selected With Next");
-    removeButton = new QPushButton("Remove Selected From List");
-    propertiesButton = new QPushButton("Show Current Item's MetaData ");
+    mediaButtonsLayout = new QHBoxLayout();
+
+    swapButton = new QPushButton("Swap Selected");
+    removeButton = new QPushButton("Remove Selected");
+    propertiesButton = new QPushButton("Current MetaData");
+
+    mediaButtonsLayout->addWidget(swapButton);
+    mediaButtonsLayout->addWidget(removeButton);
+    mediaButtonsLayout->addWidget(propertiesButton);
+
 
     // MainWindow Labels
 
@@ -258,15 +263,12 @@ MainWindow::MainWindow(QWidget *parent)
     controlsLayout = new QVBoxLayout();
 
     controlsLayout->addWidget(fileManagerButton);
-    controlsLayout->addWidget(setupButton);
     controlsLayout->addLayout(playerButtonsLayout);
     controlsLayout->addWidget(durationSliderLabel);
     controlsLayout->addWidget(progSlider);
     controlsLayout->addWidget(volumeSliderLabel);
     controlsLayout->addWidget(volumeSlider);
-    controlsLayout->addWidget(swapButton);
-    controlsLayout->addWidget(removeButton);
-    controlsLayout->addWidget(propertiesButton);
+    controlsLayout->addItem(mediaButtonsLayout);
     controlsLayout->addWidget(mediaList);
     controlsLayout->addWidget(SoundWaveButton);
     controlsLayout->addWidget(soundWaveSettingsPlaceHolder);
@@ -343,7 +345,6 @@ void MainWindow::identifyButton()
 void MainWindow::setController(Controller* ctrl)
 {
     c = ctrl;
-    connect(setupButton, SIGNAL(pressed()), c, SLOT(onSetupButtonPressed()));
     connect(this, SIGNAL(widgetSelected(int)), c, SLOT(setId(int)));
     connect(soundWaveRemapFactorSlider, SIGNAL(valueChanged(int)), c, SLOT(onSoundWaveRemapFactorSliderChanged(int)));
 

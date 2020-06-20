@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <QFile>
 
 #include "View/mainwindow.h"
 #include "Controller/controller.h"
@@ -19,13 +18,6 @@ int main(int argc, char *argv[])
 
     w.setController(&c);
     c.setView(&w);
-
-    /*
-    QFile File(":resources/resources/stylesheet.css");
-    File.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(File.readAll());
-    a.setStyleSheet(styleSheet);
-    */
 
     w.resize(1200,700);
     w.show();

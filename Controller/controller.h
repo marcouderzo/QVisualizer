@@ -80,7 +80,6 @@ signals:
     void setDefault();
 
 public slots:
-    void onSetupButtonPressed();
     void setMetaData(QMediaPlayer::MediaStatus);
     void onSendToMediaVector(const std::string&);
     void onSoundWaveRemapFactorSliderChanged(int);

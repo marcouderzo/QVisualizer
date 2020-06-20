@@ -47,13 +47,10 @@ void MediaVector::pop(unsigned int index)
             *(paths + i) = *(paths + i + 1);
         }
         delete aux;
-        qDebug()<<numberOfElements << index;
         paths[numberOfElements] = nullptr;
      }
-    qDebug()<<"deleted";
 }
 
-// /home/student/Downloads/loveagain
 
 FileAudio* MediaVector::operator [] (unsigned int i) const
 {

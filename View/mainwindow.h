@@ -67,6 +67,8 @@ private:
     QPushButton* prevButton;
     QSlider* progSlider;
     QSlider* volumeSlider;
+
+    QHBoxLayout* mediaButtonsLayout;
     QPushButton* swapButton;
     QPushButton* removeButton;
     QPushButton* propertiesButton;
@@ -124,7 +126,6 @@ private:
     QPushButton* applyRGBIncrementButton;
 
 
-    QPushButton* setupButton;
     QRadioButton* SoundWaveButton;
     QRadioButton* FFTBarsButton;
     QRadioButton* FFTCircleButton;

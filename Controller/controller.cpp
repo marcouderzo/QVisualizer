@@ -102,27 +102,6 @@ void Controller::setView(MainWindow* wi)
     connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), w, SIGNAL(updateProperties(std::string, std::string, std::string, bool)));
 }
 
-void Controller::onSetupButtonPressed()
-{
-    /////////////////////////////////////////////   QAUDIORECORDER for testing use
-    recorder->setAudioInput("Stereo Mix (Realtek High Definition Audio)");
-
-    QAudioEncoderSettings settings;
-    settings.setCodec("audio/pcm");
-    settings.setSampleRate(8000);
-    settings.setBitRate(128000);
-    settings.setQuality(QMultimedia::VeryHighQuality);
-
-    recorder->setEncodingSettings(settings);
-    recorder->record();
-    /////////////////////////////////////////////
-
-    m_QAudioProbe->setSource(recorder);
-    //m_QAudioProbe->setSource(m_QMediaPlayer);
-
-    connect(m_QAudioProbe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(processBuffer(QAudioBuffer)));
-}
-
 void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 {
     if(status==QMediaPlayer::LoadedMedia)
