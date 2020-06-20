@@ -28,7 +28,8 @@ void MetaDataWidget::paintGL()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     painter->begin(this);
-    painter->setRenderHint(QPainter::HighQualityAntialiasing, QPainter::TextAntialiasing);
+    painter->setRenderHint(QPainter::HighQualityAntialiasing);
+    painter->setRenderHint(QPainter::TextAntialiasing);
 
     int x=coverArt.width();
     int y=coverArt.height();

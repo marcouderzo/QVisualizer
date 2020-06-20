@@ -19,7 +19,7 @@ void SoundWaveWidget::paintGL()
     glBegin(GL_LINES);
 
     GLdouble xOffset=0.0;
-    for(unsigned int i=0; i<3840; i++)
+    for(unsigned int i=0; i<m_wave.size(); i++)
     {
         glVertex2d(-1+xOffset, m_wave[i]);
         xOffset+=2.0/static_cast<double>(m_wave.size());

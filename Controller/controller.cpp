@@ -11,6 +11,10 @@ Controller::Controller()
 
     auxMediaPlayer = new QMediaPlayer();
 
+    m_QAudioProbe->setSource(m_QMediaPlayer);
+
+    connect(m_QAudioProbe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(processBuffer(QAudioBuffer)));
+
     connect(auxMediaPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(setMetaData(QMediaPlayer::MediaStatus)));
 
     connect(m_QMediaPlayer, SIGNAL(positionChanged(qint64)), this, SIGNAL(positionChanged(qint64)));
@@ -35,6 +39,7 @@ void Controller::setId(int b)
 //https://doc.qt.io/archives/qt-5.6/qtmultimedia-multimedia-audiorecorder-audiorecorder-cpp.html
 qreal Controller::getPeakValue(const QAudioFormat &format)
 {
+    //qDebug()<<format.sampleType() << format.sampleSize();
     // Note: Only the most common sample formats are supported
     if (!format.isValid())
         return qreal(0);
@@ -57,6 +62,8 @@ qreal Controller::getPeakValue(const QAudioFormat &format)
     #ifdef Q_OS_UNIX
                 return qreal(SHRT_MAX);
     #endif
+        if (format.sampleSize() == 24)
+            return qreal(SHRT_MAX);
         if (format.sampleSize() == 16)
             return qreal(SHRT_MAX);
         if (format.sampleSize() == 8)
@@ -126,10 +133,10 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             file= new MP3File(helperFilePath);
         else if(helperFilePath.find(".wav")!= std::string::npos)
             file=new WAVFile(helperFilePath);
-        else if(helperFilePath.find(".flac")!= std::string::npos)
-            file=new FLACFile(helperFilePath);
-        else if(helperFilePath.find(".aac")!= std::string::npos)
-            file= new AACFile(helperFilePath);
+        else if(helperFilePath.find(".opus")!= std::string::npos)
+            file=new OPUSFile(helperFilePath);
+        else if(helperFilePath.find(".aiff")!= std::string::npos)
+            file= new AIFFFile(helperFilePath);
         else{
             emit formatNotValid();
             return;
@@ -321,6 +328,7 @@ void Controller::onOvertimeFFTDynamicSmoothLimitChanged(int amt)
 void Controller::processBuffer(const QAudioBuffer buffer)
 {
     const qint16* data = buffer.data<qint16>();
+    //qDebug()<<buffer.sampleCount();
     std::complex<double> aux[buffer.sampleCount()];
     for(int i=0; i<buffer.sampleCount(); i++)
     {

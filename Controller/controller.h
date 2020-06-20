@@ -19,8 +19,8 @@
 #include "Model/fileaudio.h"
 #include "Model/mp3file.h"
 #include "Model/wavfile.h"
-#include "Model/flacfile.h"
-#include "Model/aacfile.h"
+#include "Model/opusfile.h"
+#include "Model/aifffile.h"
 #include "mediavector.h"
 
 #include "exceptions.h"

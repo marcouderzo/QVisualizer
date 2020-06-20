@@ -1,5 +1,5 @@
 QT       += core gui multimedia opengl
-LIBS     += -lopengl32 -lglu32 #Windows Only, delete if using Linux
+#LIBS     += -lopengl32 -lglu32 #Windows Only, delete if using Linux
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,57 +17,54 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Model\aacfile.cpp \
-    Controller\controller.cpp \
-    Model\fft.cpp \
-    Model\fftbars.cpp \
+    Controller/controller.cpp \
+    Model/fft.cpp \
+    Model/fftbars.cpp \
     View/mediapropertieswidget.cpp \
-    View\fftbarswidget.cpp \
-    Model\fftcircle.cpp \
-    View\fftcirclewidget.cpp \
-    Model\fileaudio.cpp \
-    View\filemanagerwidget.cpp \
-    Model\flacfile.cpp \
+    View/fftbarswidget.cpp \
+    Model/fftcircle.cpp \
+    View/fftcirclewidget.cpp \
+    Model/fileaudio.cpp \
+    View/filemanagerwidget.cpp \
     main.cpp \
-    View\mainwindow.cpp \
+    View/mainwindow.cpp \
     mediavector.cpp \
-    View\metadatawidget.cpp \
-    Model\mp3file.cpp \
-    Model\onda.cpp \
-    Model\overtimeFFT.cpp \
-    View\overtimefftwidget.cpp \
-    Model\soundwave.cpp \
-    View\soundwavewidget.cpp \
-    Model\timestep.cpp \
-    Model\wavfile.cpp
+    View/metadatawidget.cpp \
+    Model/onda.cpp \
+    Model/overtimeFFT.cpp \
+    View/overtimefftwidget.cpp \
+    Model/soundwave.cpp \
+    View/soundwavewidget.cpp \
+    Model/timestep.cpp \
+    Model/wavfile.cpp \
+    Model/mp3file.cpp \
+    Model/aifffile.cpp \
+    Model/opusfile.cpp
 
 HEADERS += \
-    Model\aacfile.h \
-    Controller\controller.h \
-    Model\fft.h \
-    Model\fftbars.h \
+    Controller/controller.h \
+    Model/fft.h \
+    Model/fftbars.h \
     View/mediapropertieswidget.h \
-    View\fftbarswidget.h \
-    Model\fftcircle.h \
-    View\fftcirclewidget.h \
-    Model\fileaudio.h \
-    View\filemanagerwidget.h \
-    Model\flacfile.h \
-    View\mainwindow.h \
+    View/fftbarswidget.h \
+    Model/fftcircle.h \
+    View/fftcirclewidget.h \
+    Model/fileaudio.h \
+    View/filemanagerwidget.h \
+    View/mainwindow.h \
     exceptions.h \
     mediavector.h \
-    View\metadatawidget.h \
-    Model\mp3file.h \
-    Model\onda.h \
-    Model\overtimeFFT.h \
-    View\overtimefftwidget.h \
-    Model\soundwave.h \
-    View\soundwavewidget.h \
-    Model\timestep.h \
-    Model\wavfile.h
-
-FORMS += \
-    View\mainwindow.ui
+    View/metadatawidget.h \
+    Model/mp3file.h \
+    Model/onda.h \
+    Model/overtimeFFT.h \
+    View/overtimefftwidget.h \
+    Model/soundwave.h \
+    View/soundwavewidget.h \
+    Model/timestep.h \
+    Model/wavfile.h \
+    Model/aifffile.h \
+    Model/opusfile.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
