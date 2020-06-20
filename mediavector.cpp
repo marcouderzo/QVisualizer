@@ -40,15 +40,20 @@ void MediaVector::pop(unsigned int index)
 {
     if(numberOfElements != 0 && index < numberOfElements)
     {
-        for(unsigned int i = index; i < numberOfElements - 1; i++)
+        numberOfElements--;
+        FileAudio* aux = *(paths+index);
+        for(unsigned int i = index; i < numberOfElements; i++)
         {
             *(paths + i) = *(paths + i + 1);
         }
-        delete (paths[numberOfElements - 1]);
-        paths[numberOfElements - 1] = nullptr;
-        numberOfElements--;
-     }    
+        delete aux;
+        qDebug()<<numberOfElements << index;
+        paths[numberOfElements] = nullptr;
+     }
+    qDebug()<<"deleted";
 }
+
+// /home/student/Downloads/loveagain
 
 FileAudio* MediaVector::operator [] (unsigned int i) const
 {

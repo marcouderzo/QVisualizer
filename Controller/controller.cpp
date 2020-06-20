@@ -291,9 +291,18 @@ void Controller::onVolumeChanged(int volume)
 
 void Controller::onRemoveMediaButtonPressed(unsigned int index)
 {
-//    qDebug()<< QString(m_mediaVector[index]->getTitle().c_str());
-//    qDebug()<< "index passed is = " << index;
-     m_mediaVector.pop(index);
+    if(m_mediaVector.getSize() == 0 ) return;
+
+    std::string aux = m_QMediaPlayer->currentMedia().canonicalUrl().toString().toStdString();
+    aux.erase(0, 7);
+
+    if(aux == m_mediaVector[index]->getFilePath())
+    {
+        m_QMediaPlayer->stop();
+        m_QMediaPlayer->setMedia(nullptr);
+    }
+
+    m_mediaVector.pop(index);
 }
 
 void Controller::onSwapMediaButtonPressed(unsigned int index)
@@ -328,7 +337,6 @@ void Controller::onOvertimeFFTDynamicSmoothLimitChanged(int amt)
 void Controller::processBuffer(const QAudioBuffer buffer)
 {
     const qint16* data = buffer.data<qint16>();
-    //qDebug()<<buffer.sampleCount();
     std::complex<double> aux[buffer.sampleCount()];
     for(int i=0; i<buffer.sampleCount(); i++)
     {
