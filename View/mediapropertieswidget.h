@@ -25,7 +25,7 @@ private:
 
 public slots:
 
-    void onUpdateProperties(std::string, std::string, std::string, bool);
+    void onUpdateProperties(const std::string&, const std::string&, const std::string&, bool);
 
 };
 

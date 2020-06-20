@@ -160,7 +160,7 @@ signals:
     void sendPalette(float,float,float,float,float,float);
     void changeIncrementSpeed(float, float, float);
     void sendIncrementSpeed(float, float, float);
-    void updateProperties(std::string, std::string, std::string, bool);
+    void updateProperties(const std::string&, const std::string&, const std::string&, bool);
 
 public slots:
 

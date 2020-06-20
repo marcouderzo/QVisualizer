@@ -307,7 +307,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(propertiesButton, SIGNAL(clicked()), this, SLOT(onPropertiesButtonClicked()));
-    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), m_MediaPropertiesWidget, SLOT(onUpdateProperties(std::string, std::string, std::string, bool)));
+    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), m_MediaPropertiesWidget, SLOT(onUpdateProperties(const std::string&, const std::string&,const std::string&, bool)));
 
     connect(this, SIGNAL(updateTitleInWidget(std::string)), m_MetaDataWidget, SLOT(onUpdateTitleInWidget(const std::string&)));
     connect(this, SIGNAL(updateImageInWidget(const QImage&)), m_MetaDataWidget, SLOT(onUpdateImageInWidget(const QImage&)));

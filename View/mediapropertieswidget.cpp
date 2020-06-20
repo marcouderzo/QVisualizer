@@ -2,7 +2,7 @@
 
 MediaPropertiesWidget::MediaPropertiesWidget()
 {
-    setFixedSize(200, 300);
+    setFixedSize(220, 310);
     layout = new QGridLayout();
 
     QLabel* titleLabel= new QLabel("Title: ");
@@ -29,18 +29,18 @@ void MediaPropertiesWidget::setController(Controller * c)
     ctrl=c;
 }
 
-void MediaPropertiesWidget::onUpdateProperties(std::string title, std::string artist, std::string album, bool lossless)
+void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const std::string& artist, const std::string& album, bool lossless)
 {
      if(title=="")
-         m_title.setText("No Title");
+         m_title.setText("No Title Available");
      else
          m_title.setText(title.c_str());
      if(artist=="")
-         m_artist.setText("No Artist");
+         m_artist.setText("No Artist Available");
      else
          m_artist.setText(artist.c_str());
      if(album=="")
-         m_album.setText("No Title");
+         m_album.setText("No Title Available");
      else
          m_album.setText(artist.c_str());
      if(lossless)
