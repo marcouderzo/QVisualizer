@@ -63,8 +63,6 @@ public:
 
   };
 
-  //ConstIterator begin() const;
-  //ConstIterator end() const;
   Iterator begin() const;
   Iterator end() const;
 

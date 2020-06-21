@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
 {
+    setMinimumSize(1600,850);
     m_soundWaveWidget = new SoundWaveWidget();
     m_soundWaveWidget->setMinimumSize(QSize(400,300));
 

@@ -84,7 +84,7 @@ MediaVector::Iterator MediaVector::begin()const
 
 MediaVector::Iterator MediaVector::end()const
 {
-    return paths[numberOfCells];
+    return paths[numberOfElements];
 }
 
 

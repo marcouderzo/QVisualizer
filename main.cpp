@@ -12,8 +12,6 @@ int main(int argc, char *argv[])
 
     w.setController(&c);
     c.setView(&w);
-
-    w.resize(1200,700);
     w.show();
 
     a.setWindowIcon(QIcon(":resources/resources/QVisualizerIcon.png"));

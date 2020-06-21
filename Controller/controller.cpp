@@ -221,8 +221,9 @@ void Controller::onPauseButtonPressed()
 void Controller::onPrevButtonPressed(unsigned int current)
 {
     m_QMediaPlayer->stop();
+
     if(m_mediaVector.getSize() == 0) return;
-    if(m_mediaVector[current-1]==nullptr) return;
+    if(current==0) return;
 
     FileAudio* file = m_mediaVector[current-1];
 
@@ -240,12 +241,7 @@ void Controller::onNextButtonPressed(unsigned int current)
     m_QMediaPlayer->stop();
 
     if(m_mediaVector.getSize() == 0) return;
-
-    if(!m_mediaVector[current+1]) return;
-
-    MediaVector::Iterator it = m_mediaVector[current+1];
-    if(it == m_mediaVector.end()) return;
-
+    if(current == m_mediaVector.getSize()-1) return;
 
     FileAudio* file = m_mediaVector[current+1];
 
