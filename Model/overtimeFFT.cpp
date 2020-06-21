@@ -70,6 +70,7 @@ void OvertimeFFT::smoothTimeBuffer()
 
     if(smoothing==2)
     {
+        if(timeBuffer.size() < 100) return;
         for(unsigned int i=1; i<timeBuffer.size()-smoothLimit; i++)
             for(unsigned int k=0; k<100; k++)
                 timeBuffer[i][k] = (timeBuffer[i][k]+timeBuffer[i-1][k])/2;
