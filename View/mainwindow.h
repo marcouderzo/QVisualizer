@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QComboBox>
-#include <QString>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSlider>
@@ -13,11 +12,6 @@
 #include <QWidget>
 #include <QLabel>
 #include <QMessageBox>
-
-#include <QMediaPlayer>
-
-#include <QAudioProbe>
-#include <QAudioRecorder>
 #include <QButtonGroup>
 
 #include "soundwavewidget.h"

@@ -450,12 +450,14 @@ void MainWindow::onItemDoubleClicked(QListWidgetItem* item)
 
 void MainWindow::onPrevButtonPressed()
 {
+    if(mediaList->selectedItems().isEmpty()) return;
     int index = mediaList->currentRow();
     emit previousMedia(static_cast<unsigned int>(index));
 }
 
 void MainWindow::onNextButtonPressed()
 {
+    if(mediaList->selectedItems().isEmpty()) return;
     int index = mediaList->currentRow();
     emit nextMedia(static_cast<unsigned int>(index));
 }
@@ -482,6 +484,7 @@ void MainWindow::helper_progSliderPositionChanged(int i)
 
 void MainWindow::onRemoveButtonPressed()
 {
+    if(mediaList->selectedItems().isEmpty()) return;
     int index = mediaList->currentRow();
     emit removeMedia(static_cast<unsigned int>(index));
     mediaList->takeItem(index);
@@ -489,6 +492,7 @@ void MainWindow::onRemoveButtonPressed()
 
 void MainWindow::onSwapMediaButtonPressed()
 {
+    if(mediaList->selectedItems().isEmpty()) return;
     int index = mediaList->currentRow();
     emit swapMedia(static_cast<unsigned int>(index));
     QListWidgetItem* toSwap = mediaList->takeItem(index);
