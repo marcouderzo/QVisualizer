@@ -22,13 +22,12 @@ void FFTBarsWidget::paintGL()
 
     for(unsigned long long i=0; i<100; i++)
     {
-        //draw bar as rectangle
-        glVertex2d(-1.0+xOffset, -1.0); //bottom-left vertex
-        glVertex2d(-1.0+xOffset, m_heights[i]); //top-left vertex
-        glVertex2d(-0.99+xOffset, m_heights[i]); //top-right vertex
-        glVertex2d(-0.99+xOffset, -1.0); //bottom-right vertex
+        glVertex2d(-1.0+xOffset, -1.0);
+        glVertex2d(-1.0+xOffset, m_heights[i]);
+        glVertex2d(-0.99+xOffset, m_heights[i]);
+        glVertex2d(-0.99+xOffset, -1.0);
 
-        xOffset+=0.02; // increment offset for the next bar
+        xOffset+=0.02;
     }
 
     glEnd();

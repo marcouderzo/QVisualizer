@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     mediaList = new QListWidget();
 
-    //buttons
     fileManagerButton=new QPushButton("Manage Files");
     playButton=new QPushButton("Play");
     playButton->setIcon(QIcon(":resources/resources/playIcon.png"));
@@ -53,16 +52,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     mediaButtonsLayout = new QHBoxLayout();
 
-    swapButton = new QPushButton("Swap Selected");
-    removeButton = new QPushButton("Remove Selected");
+    swapButton = new QPushButton("Swap");
+    removeButton = new QPushButton("Remove");
     propertiesButton = new QPushButton("Current MetaData");
 
     mediaButtonsLayout->addWidget(swapButton);
     mediaButtonsLayout->addWidget(removeButton);
     mediaButtonsLayout->addWidget(propertiesButton);
 
-
-    // MainWindow Labels
 
     QLabel* durationSliderLabel = new QLabel("Duration");
     QLabel* volumeSliderLabel = new QLabel("Volume");
@@ -332,8 +329,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(endRedValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endGreenValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(endBlueValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
-
-
 }
 
 void MainWindow::identifyButton()
@@ -383,7 +378,6 @@ void MainWindow::setController(Controller* ctrl)
 
     connect(c, SIGNAL(setDefault()), m_MetaDataWidget, SLOT(onSetDefaultEvent()));
     connect(c, SIGNAL(setDefault()), m_MediaPropertiesWidget, SLOT(onSetDefaultEvent()));
-
 }
 
 void MainWindow::onSoundWaveButtonClicked(bool checked)
@@ -472,12 +466,12 @@ void MainWindow::onUpdateCurrentRow(unsigned int index)
 
 void MainWindow::onPositionChanged(qint64 t)
 {
-    progSlider->setValue(static_cast<int>(t/1000));
+    progSlider->setValue(t/1000);
 }
 
 void MainWindow::onUpdateProgSliderRange(int d)
 {
-    progSlider->setRange(0, d);
+    progSlider->setRange(0, d+1);
 }
 
 void MainWindow::helper_progSliderPositionChanged(int i)

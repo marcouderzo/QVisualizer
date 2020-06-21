@@ -43,7 +43,7 @@ void MetaDataWidget::paintGL()
 
     painter->drawImage(QRect(10, 30, x, y), coverArt, coverArt.rect());
 
-    double factor = titleRect.width() / painter->fontMetrics().horizontalAdvance(title.c_str());
+    double factor = titleRect.width() / painter->fontMetrics().width(title.c_str());
     if ((factor < 1) || (factor > 1.25))
     {
         QFont f = painter->font();

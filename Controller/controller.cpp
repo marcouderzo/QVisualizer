@@ -18,7 +18,7 @@ Controller::Controller()
     connect(auxMediaPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(setMetaData(QMediaPlayer::MediaStatus)));
 
     connect(m_QMediaPlayer, SIGNAL(positionChanged(qint64)), this, SIGNAL(positionChanged(qint64)));
-    connect(this, SIGNAL(progSliderPositionChanged(qint64)), m_QMediaPlayer, SLOT(setPosition(qint64)));
+    connect(this, SIGNAL(progSliderPositionChanged(qint64)), this, SLOT(onDurationSliderMoved(qint64)));
 
     m_soundWave = new SoundWave();
     m_FFTBars = new FFTBars();
@@ -35,8 +35,7 @@ void Controller::setId(int b)
     id = b;
 }
 
-//Qt examples
-//https://doc.qt.io/archives/qt-5.6/qtmultimedia-multimedia-audiorecorder-audiorecorder-cpp.html
+//Credits: Qt examples: https://doc.qt.io/archives/qt-5.6/qtmultimedia-multimedia-audiorecorder-audiorecorder-cpp.html
 qreal Controller::getPeakValue(const QAudioFormat &format)
 {
     // Note: Only the most common sample formats are supported
@@ -50,7 +49,7 @@ qreal Controller::getPeakValue(const QAudioFormat &format)
     case QAudioFormat::Unknown:
         break;
     case QAudioFormat::Float:
-        if (format.sampleSize() != 32) // other sample formats are not supported
+        if (format.sampleSize() != 32)
             return qreal(0);
         return qreal(1.00003);
     case QAudioFormat::SignedInt:
@@ -61,8 +60,6 @@ qreal Controller::getPeakValue(const QAudioFormat &format)
     #ifdef Q_OS_UNIX
                 return qreal(SHRT_MAX);
     #endif
-        if (format.sampleSize() == 24)
-            return qreal(SHRT_MAX);
         if (format.sampleSize() == 16)
             return qreal(SHRT_MAX);
         if (format.sampleSize() == 8)
@@ -121,6 +118,8 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         }
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
+        file->setDuration(auxMediaPlayer->duration());
+
         for(auto el : availableMetaData)
         {
             if(el==QMediaMetaData::Title)
@@ -132,9 +131,6 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                 auto dotpos = helperFilePath.find_last_of('.');
                 file->setTitle(helperFilePath.substr(slashpos+1, dotpos-slashpos-1));
             }
-
-            if(el==QMediaMetaData::Duration)
-                file->setDuration(auxMediaPlayer->metaData(QMediaMetaData::Duration).toString().toUInt());
 
             if(el==QMediaMetaData::Author)
                 file->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
@@ -244,7 +240,11 @@ void Controller::onNextButtonPressed(unsigned int current)
     m_QMediaPlayer->stop();
 
     if(m_mediaVector.getSize() == 0) return;
-    if(m_mediaVector[current+1]==nullptr) return;
+
+    if(!m_mediaVector[current+1]) return;
+
+    MediaVector::Iterator it = m_mediaVector[current+1];
+    if(it == m_mediaVector.end()) return;
 
 
     FileAudio* file = m_mediaVector[current+1];
@@ -319,6 +319,11 @@ void Controller::onFFTCircleSensitivitySliderChanged(int amt)
 void Controller::onOvertimeFFTDynamicSmoothLimitChanged(int amt)
 {
     m_OvertimeFFT->setSmoothLimit(static_cast<unsigned int>(amt));
+}
+
+void Controller::onDurationSliderMoved(qint64 s)
+{
+    m_QMediaPlayer->setPosition(s*1000);
 }
 
 void Controller::processBuffer(const QAudioBuffer buffer)

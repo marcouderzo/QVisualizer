@@ -1,7 +1,6 @@
 #ifndef FFTBARSWIDGET_H
 #define FFTBARSWIDGET_H
 
-//#include <QMainWindow>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 

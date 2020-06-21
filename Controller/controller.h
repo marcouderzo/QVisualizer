@@ -37,8 +37,6 @@ private:
 
     QMediaPlayer* auxMediaPlayer;
 
-    QAudioRecorder* recorder = new QAudioRecorder(); //for live testing use
-
     SoundWave* m_soundWave;
     FFTBars* m_FFTBars;
     FFTCircle* m_FFTCircle;
@@ -100,6 +98,7 @@ public slots:
     void onChangeIncrementSpeed(float, float, float);
     void onFFTCircleSensitivitySliderChanged(int);
     void onOvertimeFFTDynamicSmoothLimitChanged(int);
+    void onDurationSliderMoved(qint64);
 
 private slots:
     void processBuffer(const QAudioBuffer);

@@ -16,12 +16,10 @@ public:
     QImage getCoverArt()const override;
     void setArtist(const std::string&)override;
     void setAlbum(const std::string&)override;
+    bool isLossless() const override;
 
  private:
     std::string title;
-    std::string artist;
-    std::string album;
-    QImage coverArt;
 };
 
 #endif // AIFFFile_H

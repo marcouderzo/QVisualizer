@@ -2,7 +2,7 @@
 #define FILEAUDIO_H
 
 #include <string>
-#include <QImage> // including QImage to save Cover Art MetaData
+#include <QImage> //Including QImage in order to save Cover Art MetaData
 
 class FileAudio
 {

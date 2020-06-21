@@ -2,8 +2,7 @@
 
 Onda::Onda()
 {
-    //frames = 2304;
-    frames = 3840;
+    frames = 2304;
 }
 
 void Onda::setFrames(unsigned int f)

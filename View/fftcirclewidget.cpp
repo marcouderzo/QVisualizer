@@ -34,14 +34,12 @@ void FFTCircleWidget::paintGL()
 
     for(int i=0; i<32; i++){
 
-        //calcolo il diametro da disegnare
         pen-> setColor(Qt::white);
         double aux = (m_radiuses[k] + m_radiuses[k + 1] + m_radiuses[k + 2]) / 3;
         aux *= w;
         k += 3;
         painter-> setPen(*pen);
 
-        //creo il rettangolo e lo sposto
         QRect* rect = new QRect(400, 400, 100 + static_cast<int>(aux), 100 + static_cast<int>(aux));
         rect->moveCenter(QPoint(w, h));
 

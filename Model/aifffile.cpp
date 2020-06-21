@@ -1,6 +1,6 @@
 #include "Model/aifffile.h"
 
-AIFFFile::AIFFFile(const std::string& path): FileAudio (path), title(""), artist(""), album(""){}
+AIFFFile::AIFFFile(const std::string& path): FileAudio (path), title(""){}
 
 FileAudio *AIFFFile::clone() const
 {
@@ -14,35 +14,28 @@ std::string AIFFFile::getTitle() const
 
 std::string AIFFFile::getArtist() const
 {
-    return artist;
+    return "Artist is not available";
 }
 
 std::string AIFFFile::getAlbum() const
 {
-    return album;
+    return "Artist is not available";
 }
 
-void AIFFFile::setCoverArt(const QImage & image)
-{
-    coverArt = image;
-}
+void AIFFFile::setCoverArt(const QImage & image) {}
 
 QImage AIFFFile::getCoverArt()const
 {
-    return coverArt;
+    return QImage(nullptr);
 }
 
-void AIFFFile::setTitle(const std::string& s)
-{
-    title=s;
-}
+void AIFFFile::setTitle(const std::string& s) {}
 
-void AIFFFile::setArtist(const std::string& s)
-{
-    artist=s;
-}
+void AIFFFile::setArtist(const std::string& s) {}
 
-void AIFFFile::setAlbum(const std::string &s)
+void AIFFFile::setAlbum(const std::string &s) {}
+
+bool AIFFFile::isLossless() const
 {
-    album=s;
+    return true;
 }

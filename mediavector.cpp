@@ -1,5 +1,4 @@
 #include "mediavector.h"
-#include <QDebug>
 
 using namespace std;
 
@@ -77,17 +76,18 @@ void MediaVector::swap(unsigned int i, unsigned int j)
     paths[j] = aux;
 }
 
-MediaVector::ConstIterator MediaVector::begin()const
+
+MediaVector::Iterator MediaVector::begin()const
 {
     return paths[0];
 }
 
-MediaVector::ConstIterator MediaVector::end()const
+MediaVector::Iterator MediaVector::end()const
 {
     return paths[numberOfCells];
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
+
 
 MediaVector::Iterator::Iterator():p(nullptr){}
 
@@ -138,8 +138,6 @@ bool MediaVector::Iterator::operator != (const MediaVector::Iterator& it) const
 {
     return p != it.p;
 }
-
-/////////////////////////////////////////////////////////////////////////
 
 MediaVector::ConstIterator::ConstIterator():p(nullptr){}
 

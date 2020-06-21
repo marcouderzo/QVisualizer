@@ -1,5 +1,4 @@
 QT       += core gui multimedia opengl
-LIBS     += -lopengl32 -lglu32 #Windows Only, delete if using Linux
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
