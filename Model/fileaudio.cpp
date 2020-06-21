@@ -10,6 +10,11 @@ std::string FileAudio::getFilePath() const
     return filePath;
 }
 
+std::string FileAudio::getTitle() const
+{
+    return title;
+}
+
 unsigned int FileAudio::getDuration() const
 {
     return duration;
@@ -28,4 +33,9 @@ void FileAudio::setDuration(unsigned int i)
 bool FileAudio::isLossless() const
 {
     return false;
+}
+
+void FileAudio::setTitle(const std::string & t)
+{
+    title=t;
 }

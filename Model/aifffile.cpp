@@ -7,19 +7,14 @@ FileAudio *AIFFFile::clone() const
     return new AIFFFile(*this);
 }
 
-std::string AIFFFile::getTitle() const
-{
-    return title;
-}
-
 std::string AIFFFile::getArtist() const
 {
-    return "Artist is not available";
+    return "AIFF Doesn't Support Metadata!";
 }
 
 std::string AIFFFile::getAlbum() const
 {
-    return "Artist is not available";
+    return "AIFF Doesn't Support Metadata!";
 }
 
 void AIFFFile::setCoverArt(const QImage & image) {}
@@ -28,8 +23,6 @@ QImage AIFFFile::getCoverArt()const
 {
     return QImage(nullptr);
 }
-
-void AIFFFile::setTitle(const std::string& s) {}
 
 void AIFFFile::setArtist(const std::string& s) {}
 

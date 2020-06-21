@@ -13,7 +13,7 @@ public:
 
     std::string getFilePath() const;
     std::string getFilename() const;
-    virtual std::string getTitle() const = 0;
+    std::string getTitle() const;
     virtual std::string getArtist() const = 0;
     virtual std::string getAlbum() const = 0;
     virtual QImage getCoverArt()const = 0;
@@ -21,14 +21,14 @@ public:
     void setFilePath(const std::string&);
     void setDuration(unsigned int);
     virtual bool isLossless() const;
-    virtual void setTitle(const std::string&) = 0 ;
+    void setTitle(const std::string&);
     virtual void setArtist(const std::string&) = 0;
     virtual void setAlbum(const std::string&) = 0;
     virtual void setCoverArt(const QImage&) = 0;
 
 private:
     std::string filePath;
-    std::string filename;
+    std::string title;
     unsigned int duration;
 };
 

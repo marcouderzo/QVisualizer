@@ -8,8 +8,6 @@ class AIFFFile: public FileAudio
 public:
     AIFFFile(const std::string&);
     virtual FileAudio* clone() const override;
-    void setTitle(const std::string&)override;
-    std::string getTitle() const override;
     std::string getArtist() const override;
     std::string getAlbum() const override;
     void setCoverArt(const QImage&)override;

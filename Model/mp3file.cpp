@@ -7,11 +7,6 @@ FileAudio *MP3File::clone() const
     return new MP3File(*this);
 }
 
-std::string MP3File::getTitle() const
-{
-    return title;
-}
-
 std::string MP3File::getArtist() const
 {
     return artist;
@@ -30,11 +25,6 @@ void MP3File::setCoverArt(const QImage & image)
 QImage MP3File::getCoverArt() const
 {
     return coverArt;
-}
-
-void MP3File::setTitle(const std::string& s)
-{
-    title=s;
 }
 
 void MP3File::setArtist(const std::string& s)

@@ -8,11 +8,6 @@ FileAudio *OPUSFile::clone() const
     return new OPUSFile(*this);
 }
 
-std::string OPUSFile::getTitle() const
-{
-    return title;
-}
-
 std::string OPUSFile::getArtist() const
 {
     return artist;
@@ -36,11 +31,6 @@ void OPUSFile::setCoverArt(const QImage & image)
 QImage OPUSFile::getCoverArt() const
 {
     return coverArt;
-}
-
-void OPUSFile::setTitle(const std::string& s)
-{
-    title=s;
 }
 
 void OPUSFile::setArtist(const std::string& s)
