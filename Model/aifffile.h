@@ -15,9 +15,6 @@ public:
     void setArtist(const std::string&)override;
     void setAlbum(const std::string&)override;
     bool isLossless() const override;
-
- private:
-    std::string title;
 };
 
 #endif // AIFFFile_H
