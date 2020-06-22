@@ -1,6 +1,6 @@
 #include "Model/mp3file.h"
 
-MP3File::MP3File(const std::string& path): FileAudio(path), title(""), artist(""), album(""){}
+MP3File::MP3File(const std::string& path): FileAudio(path), artist(""), album(""){}
 
 FileAudio *MP3File::clone() const
 {

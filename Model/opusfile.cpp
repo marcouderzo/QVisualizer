@@ -1,6 +1,6 @@
 #include "Model/opusfile.h"
 
-OPUSFile::OPUSFile(const std::string& path): FileAudio (path), title(""), artist(""), album(""){}
+OPUSFile::OPUSFile(const std::string& path): FileAudio (path), artist(""), album(""){}
 
 
 FileAudio *OPUSFile::clone() const

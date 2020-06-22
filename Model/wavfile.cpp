@@ -1,6 +1,6 @@
 #include "Model/wavfile.h"
 
-WAVFile::WAVFile(const std::string& path): FileAudio (path), title(""), artist(""), album(""){}
+WAVFile::WAVFile(const std::string& path): FileAudio (path), artist(""), album(""){}
 
 FileAudio *WAVFile::clone() const
 {

@@ -1,6 +1,6 @@
 #include "Model/aifffile.h"
 
-AIFFFile::AIFFFile(const std::string& path): FileAudio (path), title(""){}
+AIFFFile::AIFFFile(const std::string& path): FileAudio (path){}
 
 FileAudio *AIFFFile::clone() const
 {
