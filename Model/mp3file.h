@@ -16,7 +16,6 @@ public:
     void setAlbum(const std::string&) override;
 
  private:
-    std::string title;
     std::string artist;
     std::string album;
     QImage coverArt;
