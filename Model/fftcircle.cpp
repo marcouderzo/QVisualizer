@@ -25,9 +25,9 @@ std::vector<double> FFTCircle::run(std::complex<double> *f, unsigned int samples
 {
     setFrames(samples);
     zeroPad(f);
-    runFFT(fftFrequencies, N, d);
-    remapFFT(outFrequencies, 0, sensitivity, 0.1, 1);
-    outFrequencies.clear();
+    runFFT(getFFTInputData(), N, d);
+    remapFFT(getOutFrequencies(), 0, sensitivity, 0.1, 1);
+    clearOutFrequencies();
     return radiuses;
 }
 

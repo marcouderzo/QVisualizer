@@ -21,13 +21,12 @@ std::vector<double> FFTBars::run(std::complex<double> *f, unsigned int samples, 
 {
     setFrames(samples);
     zeroPad(f);
-    runFFT(fftFrequencies, N, d);
+    runFFT(getFFTInputData(), N, d);
     smoothFFT(smoothing);
-    remapFFT(outFrequencies, 0, sensitivity, -1, 1);
-    outFrequencies.clear();
+    remapFFT(getOutFrequencies(), 0, sensitivity, -1, 1);
+    clearOutFrequencies();
     return heights;
 }
-
 
 std::vector<double> FFTBars::getHeights()const
 {

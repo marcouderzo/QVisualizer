@@ -19,17 +19,18 @@ public:
     virtual QImage getCoverArt()const = 0;
     unsigned int getDuration() const;
     void setFilePath(const std::string&);
-    void setDuration(unsigned int);
+    void setDuration(unsigned long long);
     virtual bool isLossless() const;
     void setTitle(const std::string&);
     virtual void setArtist(const std::string&) = 0;
     virtual void setAlbum(const std::string&) = 0;
     virtual void setCoverArt(const QImage&) = 0;
+    bool operator == (const FileAudio& )const;
 
 private:
     std::string filePath;
     std::string title;
-    unsigned int duration;
+    unsigned long long duration;
 };
 
 #endif // FILEAUDIO_H

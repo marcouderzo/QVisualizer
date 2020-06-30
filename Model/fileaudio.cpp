@@ -25,7 +25,7 @@ void FileAudio::setFilePath(const std::string& s)
     filePath=s;
 }
 
-void FileAudio::setDuration(unsigned int i)
+void FileAudio::setDuration(unsigned long long i)
 {
     duration=i;
 }
@@ -38,4 +38,9 @@ bool FileAudio::isLossless() const
 void FileAudio::setTitle(const std::string & t)
 {
     title=t;
+}
+
+bool FileAudio::operator == (const FileAudio &f) const
+{
+    return filePath == f.filePath;
 }

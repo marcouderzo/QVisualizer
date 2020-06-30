@@ -22,10 +22,10 @@ std::vector<double> OvertimeFFT::run(std::complex<double> *f, unsigned int sampl
 {
     setFrames(samples);
     zeroPad(f);
-    runFFT(fftFrequencies, N, d);
+    runFFT(getFFTInputData(), N, d);
     smoothFFT(1);
-    remapFFT(outFrequencies, 0, 120, -1, 0.1);
-    outFrequencies.clear();
+    remapFFT(getOutFrequencies(), 0, 120, -1, 0.1);
+    clearOutFrequencies();
     if(hasElapsed())
     {
         tick(heights);

@@ -40,12 +40,7 @@ std::vector<double> FFT::getOutFrequencies() const
     return outFrequencies;
 }
 
-std::complex<double>* FFT::getFFTFrequencies()
-{
-    return fftFrequencies;
-}
-
-int FFT::reverse(unsigned int N, unsigned int n)
+int FFT::reverse(unsigned int N, unsigned int n) const
 {
     int j, p = 0;
     for(j = 1; j <= static_cast<int>(log2(N)); j++) {
@@ -56,7 +51,7 @@ int FFT::reverse(unsigned int N, unsigned int n)
     return p;
 }
 
-void FFT::sort(std::complex<double>* f1, unsigned int N)
+void FFT::sort(std::complex<double>* f1, unsigned int N) const
 {
     std::complex<double> f2[MAX];
     for(unsigned int i = 0; i < N; i++){
@@ -67,7 +62,7 @@ void FFT::sort(std::complex<double>* f1, unsigned int N)
     }
 }
 
-void FFT::transform(std::complex<double>* f, unsigned int N)
+void FFT::transform(std::complex<double>* f, unsigned int N) const
 {
     sort(f, N);
     std::complex<double>* W = new std::complex<double> [N / 2];
@@ -93,6 +88,15 @@ void FFT::transform(std::complex<double>* f, unsigned int N)
     delete [] W;
 }
 
+void FFT::clearOutFrequencies(){
+    outFrequencies.clear();
+}
+
+std::complex<double>* FFT::getFFTInputData()
+{
+    return FFTInputData;
+}
+
 void FFT::runFFT(std::complex<double>* f, unsigned int N, double d)
 {
     transform(f, N);
@@ -105,8 +109,8 @@ void FFT::runFFT(std::complex<double>* f, unsigned int N, double d)
 void FFT::zeroPad(std::complex<double>* toInterpolate)
 {
     for(unsigned int i=0; i<getFrames(); i++)
-        fftFrequencies[i] = toInterpolate[i];
+        FFTInputData[i] = toInterpolate[i];
 
     for(unsigned int i=getFrames(); i<4096; i++)
-        fftFrequencies[i] = 0;
+        FFTInputData[i] = 0;
 }

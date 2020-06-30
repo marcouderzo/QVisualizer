@@ -3,7 +3,6 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <cmath>
 #include "Model/onda.h"
 
 #define MAX 4096
@@ -20,17 +19,15 @@ public:
     virtual void remapFFT(const std::vector<double>& ,double, double, double, double)= 0;
     void setOutFrequencies(std::complex<double>*);
     std::vector<double> getOutFrequencies() const;
-    std::complex<double>* getFFTFrequencies();
-
-protected:
-    std::vector<double> outFrequencies;
-    std::complex<double> fftFrequencies[MAX];
+    void clearOutFrequencies();
+    std::complex<double>* getFFTInputData();
 
 private:
-    int reverse(unsigned int N, unsigned int n);
-    void sort(std::complex<double>* f1, unsigned int N);
-    void transform(std::complex<double>* f, unsigned int N);
-
+    int reverse(unsigned int N, unsigned int n) const;
+    void sort(std::complex<double>* f1, unsigned int N) const;
+    void transform(std::complex<double>* f, unsigned int N) const;
+    std::vector<double> outFrequencies;
+    std::complex<double> FFTInputData[MAX];
 };
 
 
