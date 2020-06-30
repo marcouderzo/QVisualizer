@@ -87,8 +87,6 @@ MediaVector::Iterator MediaVector::end()const
     return paths[numberOfElements];
 }
 
-
-
 MediaVector::Iterator::Iterator():p(nullptr){}
 
 MediaVector::Iterator::Iterator(FileAudio* ptr):p(&ptr){}
