@@ -1,6 +1,7 @@
 #include "Controller/controller.h"
 #include "View/mainwindow.h"
 
+#include <QDebug>
 
 Controller::Controller()
 {    
@@ -116,6 +117,23 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             emit formatNotValid();
             return;
         }
+
+        if(m_mediaVector.getSize()!=0)
+        {
+            qDebug()<<"Good it is not empty";
+            for(auto it = m_mediaVector.begin(); it != m_mediaVector.end(); it++)
+            {
+                qDebug()<<"i'm iterating a bit";
+                if(*it == *file){
+                    qDebug()<<"Hey that's a clonyclony";
+                    m_mediaVector.push(file->clone());
+                    helperFilePath.empty();
+                    emit pushUpdateList(file-> getTitle());
+                    return;
+                }
+            }
+        }
+
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
         file->setDuration(auxMediaPlayer->duration());
@@ -140,16 +158,6 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 
             if(el==QMediaMetaData::ThumbnailImage)
                 file->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
-        }
-
-        for(auto it = m_mediaVector.begin(); it != m_mediaVector.end(); it++){
-
-            if(*it == *file){
-                m_mediaVector.push(file-> clone());
-                helperFilePath.empty();
-                emit pushUpdateList(file-> getTitle());
-                return;
-            }
         }
 
         helperFilePath.empty();

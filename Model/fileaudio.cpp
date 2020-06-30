@@ -15,7 +15,7 @@ std::string FileAudio::getTitle() const
     return title;
 }
 
-unsigned int FileAudio::getDuration() const
+unsigned long long FileAudio::getDuration() const
 {
     return duration;
 }
