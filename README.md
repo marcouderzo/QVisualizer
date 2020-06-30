@@ -9,3 +9,6 @@ Sviluppato da:
 
 ### Per la Macchina di Laboratorio 
 `sudo apt install qtmultimedia5-dev libqt5multimedia5-plugins`
+
+### Compilazione in Windows
+Aggiungere al .pro ` LIBS     += -lopengl32 -lglu32 #Windows Only, delete if using Linux`
