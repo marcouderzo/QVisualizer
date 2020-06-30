@@ -52,7 +52,7 @@ private:
 public:
     Controller();
     qreal getPeakValue(const QAudioFormat& format);
-    void setView(MainWindow* );
+    void setView(MainWindow*);
 
 signals:
     void outOfRangeTimer();

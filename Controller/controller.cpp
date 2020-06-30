@@ -142,6 +142,16 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                 file->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
         }
 
+        for(auto it = m_mediaVector.begin(); it != m_mediaVector.end(); it++){
+
+            if(*it == *file){
+                m_mediaVector.push(file-> clone());
+                helperFilePath.empty();
+                emit pushUpdateList(file-> getTitle());
+                return;
+            }
+        }
+
         helperFilePath.empty();
 
         m_mediaVector.push(file);
