@@ -108,20 +108,6 @@ FileAudio* MediaVector::Iterator::operator->() const
     return *p;
 }
 
-MediaVector::Iterator MediaVector::Iterator::operator ++(int)
-{
-    FileAudio** aux = p;
-    p++;
-    return *aux;
-}
-
-MediaVector::Iterator MediaVector::Iterator::operator --(int)
-{
-    FileAudio** aux = p;
-    p--;
-    return *aux;
-}
-
 MediaVector::Iterator& MediaVector::Iterator::operator ++()
 {
     p++;
@@ -156,20 +142,6 @@ const FileAudio& MediaVector::ConstIterator::operator*() const
 const FileAudio* MediaVector::ConstIterator::operator->() const
 {
     return *p;
-}
-
-MediaVector::ConstIterator MediaVector::ConstIterator::operator ++(int)
-{
-    FileAudio** aux = p;
-    p++;
-    return *aux;
-}
-
-MediaVector::ConstIterator MediaVector::ConstIterator::operator --(int)
-{
-    FileAudio** aux = p;
-    p--;
-    return *aux;
 }
 
 MediaVector::ConstIterator MediaVector::ConstIterator::operator ++()

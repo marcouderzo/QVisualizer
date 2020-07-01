@@ -36,8 +36,6 @@ public:
       Iterator(FileAudio*);
       FileAudio& operator *() const;
       FileAudio* operator ->() const;
-      Iterator operator ++ (int);
-      Iterator operator -- (int);
       Iterator& operator ++ ();
       Iterator& operator -- ();
       bool operator == (const Iterator&)const;
@@ -54,8 +52,6 @@ public:
       ConstIterator(FileAudio*);
       const FileAudio& operator *() const;
       const FileAudio* operator ->() const;
-      ConstIterator operator ++ (int);
-      ConstIterator operator -- (int);
       ConstIterator operator ++ ();
       ConstIterator operator -- ();
       bool operator == (const ConstIterator&) const;

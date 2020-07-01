@@ -121,9 +121,10 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<"Good it is not empty";
-            for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); it++)
+            for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
             {
                 qDebug()<<"i'm iterating a bit";
+                //qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
                     m_mediaVector.push(it->clone());
@@ -131,6 +132,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                     emit pushUpdateList(it->getTitle());
                     return;
                 }
+                qDebug()<<"after if";
             }
         }
 
