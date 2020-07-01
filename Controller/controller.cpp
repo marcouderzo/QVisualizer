@@ -118,9 +118,36 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
-        int i=0;
+        //int i=0;
 
-        if(m_mediaVector.getSize()!=0)
+        MediaVector::Iterator it(file);
+
+        it.print();
+
+        if(*it == *file){
+            qDebug()<<"Star sembra funzionare";
+        }
+
+        if(it-> getFilePath() == file-> getFilePath()){
+            qDebug()<<"Freccetta sembra funzionare";
+        }
+
+        FileAudio* file2 = new AIFFFile("");
+
+        MediaVector::Iterator it2(file2);
+
+        if(it == it2){
+            qDebug()<<"Uguaglianza funziona";
+        }
+
+        FileAudio* f = new MP3File("");
+        MediaVector::Iterator it3(f);
+
+        if(it != it3){
+            qDebug()<<"Disuguaglianza funziona";
+        }
+
+        /*if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<m_mediaVector.getSize();
             for(MediaVector::Iterator it = m_mediaVector.begin(); it != m_mediaVector[m_mediaVector.getSize()-1]; ++it)
@@ -137,7 +164,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                 qDebug()<<"after if";
                 i++;
             }
-        }
+        }*/
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 

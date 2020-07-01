@@ -77,7 +77,7 @@ void MediaVector::swap(unsigned int i, unsigned int j)
     paths[j] = aux;
 }
 
-
+/*
 MediaVector::Iterator MediaVector::begin()const
 {
     qDebug()<<"from Iterator begin";
@@ -88,23 +88,15 @@ MediaVector::Iterator MediaVector::end()const
 {
     qDebug()<<"from Iterator end: number of elements-1"<< numberOfElements-1;
     return paths[numberOfElements-1];
-}
+}*/
 
-MediaVector::Iterator::Iterator():p(nullptr){}
+/////////////////////////////////////////////////////////////////////////////////////
 
-MediaVector::Iterator::Iterator(FileAudio* ptr):p(&ptr) {}
+MediaVector::Iterator::Iterator(FileAudio* ptr):p(&ptr){qDebug()<<p;}
 
-FileAudio& MediaVector::Iterator::operator*() const
-{
-    return **p;
-}
+void MediaVector::Iterator::print() {qDebug()<<(*p)->getFilePath().c_str();}
 
-FileAudio* MediaVector::Iterator::operator->() const
-{
-    return *p;
-}
-
-MediaVector::Iterator& MediaVector::Iterator::operator ++()
+/*MediaVector::Iterator& MediaVector::Iterator::operator ++()
 {
     p++;
     return *this;
@@ -114,20 +106,29 @@ MediaVector::Iterator& MediaVector::Iterator::operator --()
 {
     p--;
     return *this;
+}*/
+
+FileAudio& MediaVector::Iterator::operator * () const
+{
+    return **p;
 }
 
-bool MediaVector::Iterator::operator == (const MediaVector::Iterator& it)const
+FileAudio* MediaVector::Iterator::operator -> () const
+{
+    return *p;
+}
+
+bool MediaVector::Iterator::operator == (const Iterator& it)const
 {
     return p == it.p;
 }
 
-bool MediaVector::Iterator::operator != (const MediaVector::Iterator& it) const
+bool MediaVector::Iterator::operator != (const Iterator& it)const
 {
     return p != it.p;
 }
 
-MediaVector::ConstIterator::ConstIterator():p(nullptr){}
-
+/*
 MediaVector::ConstIterator::ConstIterator(FileAudio* ptr):p(&ptr){}
 
 const FileAudio& MediaVector::ConstIterator::operator*() const
@@ -161,3 +162,4 @@ bool MediaVector::ConstIterator::operator != (const MediaVector::ConstIterator& 
 {
     return p != cit.p;
 }
+*/

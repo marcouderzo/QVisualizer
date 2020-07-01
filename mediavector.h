@@ -32,14 +32,14 @@ public:
       FileAudio** p;
 
     public:
-      Iterator();
-      Iterator(FileAudio*);
+      Iterator(FileAudio* =nullptr);
       FileAudio& operator *() const;
       FileAudio* operator ->() const;
       Iterator& operator ++ ();
       Iterator& operator -- ();
       bool operator == (const Iterator&)const;
       bool operator != (const Iterator&)const;
+      void print();
   };
 
   class ConstIterator{
