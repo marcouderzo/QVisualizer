@@ -92,11 +92,7 @@ MediaVector::Iterator MediaVector::end()const
 
 MediaVector::Iterator::Iterator():p(nullptr){}
 
-MediaVector::Iterator::Iterator(FileAudio* ptr)
-{
-    FileAudio* aux = ptr->clone();
-    p=&aux;
-}
+MediaVector::Iterator::Iterator(FileAudio* ptr):p(&ptr) {}
 
 FileAudio& MediaVector::Iterator::operator*() const
 {

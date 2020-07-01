@@ -118,12 +118,14 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
+        int i=0;
+
         if(m_mediaVector.getSize()!=0)
         {
-            qDebug()<<"Good it is not empty";
-            for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
+            qDebug()<<m_mediaVector.getSize();
+            for(MediaVector::Iterator it = m_mediaVector.begin(); it != m_mediaVector[m_mediaVector.getSize()-1]; ++it)
             {
-                qDebug()<<"i'm iterating a bit";
+                qDebug()<<"i'm iterating a bit" << i;
                 //qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
@@ -133,6 +135,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                     return;
                 }
                 qDebug()<<"after if";
+                i++;
             }
         }
 
