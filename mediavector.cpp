@@ -1,4 +1,5 @@
 #include "mediavector.h"
+#include <QDebug>
 
 using namespace std;
 
@@ -79,17 +80,23 @@ void MediaVector::swap(unsigned int i, unsigned int j)
 
 MediaVector::Iterator MediaVector::begin()const
 {
+    qDebug()<<"from Iterator begin";
     return paths[0];
 }
 
 MediaVector::Iterator MediaVector::end()const
 {
+    qDebug()<<"from Iterator end: number of elements-1"<< numberOfElements-1;
     return paths[numberOfElements-1];
 }
 
 MediaVector::Iterator::Iterator():p(nullptr){}
 
-MediaVector::Iterator::Iterator(FileAudio* ptr):p(&ptr){}
+MediaVector::Iterator::Iterator(FileAudio* ptr)
+{
+    FileAudio* aux = ptr->clone();
+    p=&aux;
+}
 
 FileAudio& MediaVector::Iterator::operator*() const
 {

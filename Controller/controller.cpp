@@ -121,8 +121,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<"Good it is not empty";
-            qDebug()<<file->getFilePath().c_str() << "file just created";
-            for(MediaVector::Iterator it = m_mediaVector.begin(); it != m_mediaVector.end(); it++)
+            for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); it++)
             {
                 qDebug()<<"i'm iterating a bit";
                 if(*it == *file){
