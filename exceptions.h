@@ -6,9 +6,8 @@
 class Exceptions : public std::exception
 {
 public:
-
     class OutOfRangeTimerValue {};
-
+    class OutOfRangeDuration {};
 };
 
 #endif // EXCEPTIONS_H

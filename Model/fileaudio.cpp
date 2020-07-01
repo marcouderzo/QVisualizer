@@ -1,5 +1,6 @@
 #include "Model/fileaudio.h"
 
+
 FileAudio::FileAudio(const std::string& path)
 {
     filePath=path;
@@ -15,7 +16,7 @@ std::string FileAudio::getTitle() const
     return title;
 }
 
-unsigned long long FileAudio::getDuration() const
+long long FileAudio::getDuration() const
 {
     return duration;
 }
@@ -25,9 +26,12 @@ void FileAudio::setFilePath(const std::string& s)
     filePath=s;
 }
 
-void FileAudio::setDuration(unsigned long long i)
+void FileAudio::setDuration(long long i)
 {
-    duration=i;
+    if(i<0)
+        throw Exceptions::OutOfRangeDuration();
+
+    duration=i/1000;
 }
 
 bool FileAudio::isLossless() const

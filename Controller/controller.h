@@ -76,6 +76,7 @@ signals:
     void fileDoesNotExist();
     void updateProperties(std::string, std::string, std::string, bool);
     void setDefault();
+    void durationError();
 
 public slots:
     void setMetaData(QMediaPlayer::MediaStatus);

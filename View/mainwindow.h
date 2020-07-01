@@ -182,6 +182,7 @@ public slots:
     void onOutOfRangeTimer();
     void onFileDoesNotExist();
     void onPropertiesButtonClicked();
+    void onDurationError();
 
 private slots:
 

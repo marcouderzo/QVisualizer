@@ -4,6 +4,8 @@
 #include <string>
 #include <QImage> //Including QImage in order to save Cover Art MetaData
 
+#include "exceptions.h"
+
 class FileAudio
 {
 public:
@@ -17,9 +19,9 @@ public:
     virtual std::string getArtist() const = 0;
     virtual std::string getAlbum() const = 0;
     virtual QImage getCoverArt()const = 0;
-    unsigned long long getDuration() const;
+    long long getDuration() const;
     void setFilePath(const std::string&);
-    void setDuration(unsigned long long);
+    void setDuration(long long);
     virtual bool isLossless() const;
     void setTitle(const std::string&);
     virtual void setArtist(const std::string&) = 0;
@@ -30,7 +32,7 @@ public:
 private:
     std::string filePath;
     std::string title;
-    unsigned long long duration;
+    long long duration;
 };
 
 #endif // FILEAUDIO_H

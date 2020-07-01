@@ -121,14 +121,15 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<"Good it is not empty";
-            for(auto it = m_mediaVector.begin(); it != m_mediaVector.end(); it++)
+            qDebug()<<file->getFilePath().c_str() << "file just created";
+            for(MediaVector::Iterator it = m_mediaVector.begin(); it != m_mediaVector.end(); it++)
             {
                 qDebug()<<"i'm iterating a bit";
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
-                    m_mediaVector.push(file->clone());
+                    m_mediaVector.push(it->clone());
                     helperFilePath.empty();
-                    emit pushUpdateList(file-> getTitle());
+                    emit pushUpdateList(it->getTitle());
                     return;
                 }
             }
@@ -136,7 +137,15 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
-        file->setDuration(auxMediaPlayer->duration());
+        try
+        {
+            file->setDuration(auxMediaPlayer->duration());
+        }
+        catch(Exceptions::OutOfRangeDuration)
+        {
+            emit durationError();
+            return;
+        }
 
         for(auto el : availableMetaData)
         {
@@ -221,7 +230,7 @@ void Controller::onMediaListItemDoubleClicked(unsigned int index)
    emit updateTitleInWidget(file->getTitle());
    emit updateArtistInWidget(file->getArtist());
    emit updateImageInWidget(file->getCoverArt());
-   emit updateProgSliderRange(file->getDuration()/1000);
+   emit updateProgSliderRange(static_cast<int>(file->getDuration()));
 
    emit updateProperties(file->getTitle(), file->getArtist(), file->getAlbum(), file->isLossless());
 }
@@ -248,7 +257,7 @@ void Controller::onPrevButtonPressed(unsigned int current)
     m_QMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(file->getFilePath().c_str())));
     emit updateTitleInWidget(file->getTitle());
     emit updateImageInWidget(file->getCoverArt());
-    emit updateProgSliderRange(file->getDuration()/1000);
+    emit updateProgSliderRange(static_cast<int>(file->getDuration()));
     emit updateCurrentRow(current-1);
 
     m_QMediaPlayer->play();
@@ -266,7 +275,7 @@ void Controller::onNextButtonPressed(unsigned int current)
     m_QMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(file->getFilePath().c_str())));
     emit updateTitleInWidget(file->getTitle());
     emit updateImageInWidget(file->getCoverArt());
-    emit updateProgSliderRange(file->getDuration()/1000);
+    emit updateProgSliderRange(static_cast<int>(file->getDuration()));
     emit updateCurrentRow(current+1);
 
     m_QMediaPlayer->play();

@@ -84,7 +84,7 @@ MediaVector::Iterator MediaVector::begin()const
 
 MediaVector::Iterator MediaVector::end()const
 {
-    return paths[numberOfElements];
+    return paths[numberOfElements-1];
 }
 
 MediaVector::Iterator::Iterator():p(nullptr){}

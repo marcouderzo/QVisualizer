@@ -376,6 +376,7 @@ void MainWindow::setController(Controller* ctrl)
     connect(c, SIGNAL(outOfRangeTimer()), this, SLOT(onOutOfRangeTimer()));
     connect(c, SIGNAL(formatNotValid()), this, SLOT(onFormatNotValid()));
     connect(c, SIGNAL(fileDoesNotExist()), this, SLOT(onFileDoesNotExist()));
+    connect(c, SIGNAL(durationError()), this, SLOT(onDurationError()));
 
     connect(c, SIGNAL(setDefault()), m_MetaDataWidget, SLOT(onSetDefaultEvent()));
     connect(c, SIGNAL(setDefault()), m_MediaPropertiesWidget, SLOT(onSetDefaultEvent()));
@@ -544,4 +545,11 @@ void MainWindow::onFileDoesNotExist()
 void MainWindow::onPropertiesButtonClicked()
 {
     m_MediaPropertiesWidget->show();
+}
+
+void MainWindow::onDurationError()
+{
+    QMessageBox msgBox;
+    msgBox.critical(nullptr, "Error", "Duration is Wrong. Media Loading will be Aborted.");
+    msgBox.setFixedSize(500,200);
 }
