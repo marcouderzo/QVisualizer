@@ -66,7 +66,7 @@ void OvertimeFFTWidget::paintGL()
     GLfloat g=g_start;
     GLfloat b=b_start;
 
-    for(unsigned long long k=0; k<m_timeBuffer.size(); k++)
+    for(unsigned int k=0; k<m_timeBuffer.size(); k++)
     {
         glColor4f(r, g, b, alphaBlending);
 
@@ -93,7 +93,7 @@ void OvertimeFFTWidget::paintGL()
             b-=b_increment;
 
         xOffset=0;
-        for(unsigned long long i=0; i<99; i++)
+        for(unsigned int i=0; i<99; i++)
         {
             glVertex2d(-1.0+t_xOffset+xOffset, yOffset+m_timeBuffer[k][i]);
             xOffset+=0.02;

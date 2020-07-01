@@ -20,7 +20,7 @@ void FFTBarsWidget::paintGL()
 
     GLdouble xOffset=0.0;
 
-    for(unsigned long long i=0; i<100; i++)
+    for(unsigned int i=0; i<100; i++)
     {
         glVertex2d(-1.0+xOffset, -1.0);
         glVertex2d(-1.0+xOffset, m_heights[i]);
