@@ -19,6 +19,7 @@ public:
  private:
     std::string artist;
     std::string album;
+    QImage coverArt;
 };
 
 #endif // WAVFILE_H

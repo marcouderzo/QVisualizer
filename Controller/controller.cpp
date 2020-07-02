@@ -118,18 +118,52 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
+        int i=0;
+
+        MediaVector::Iterator it(file);
+
+        //it.print();
+
+        if(*it == *file){
+            qDebug()<<"Star sembra funzionare";
+        }
+
+        if(it-> getFilePath() == file-> getFilePath()){
+            qDebug()<<"Freccetta sembra funzionare";
+        }
+
+        FileAudio* file2 = new AIFFFile("");
+
+        MediaVector::Iterator it2(file2);
+
+        if(it == it2){
+            qDebug()<<"Uguaglianza funziona";
+        }
+
+        FileAudio* f = new MP3File("");
+        MediaVector::Iterator it3(f);
+
+        if(it != it3){
+            qDebug()<<"Disuguaglianza funziona";
+        }
+
         if(m_mediaVector.getSize()!=0)
         {
+            qDebug()<<m_mediaVector.getSize();
             for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
             {
-                if(*it == *file)
-                {
+                qDebug()<<"i'm iterating a bit" << i;
+                qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
+                if(*it == *file){
+                    qDebug()<<"Hey that's a clonyclony";
                     m_mediaVector.push(it->clone());
                     helperFilePath.empty();
                     emit pushUpdateList(it->getTitle());
                     qDebug()<<"I cloned it!";
                     return;
                 }
+                qDebug()<<"after if";
+                i++;
             }
         }
 

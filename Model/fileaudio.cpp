@@ -47,5 +47,6 @@ void FileAudio::setTitle(const std::string & t)
 
 bool FileAudio::operator == (const FileAudio &f) const
 {
+    //qDebug()<< "1"<< filePath.c_str() << "2"<<f.filePath.c_str();
     return filePath == f.filePath;
 }

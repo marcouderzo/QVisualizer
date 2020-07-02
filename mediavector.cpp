@@ -80,11 +80,13 @@ void MediaVector::swap(unsigned int i, unsigned int j)
 
 MediaVector::Iterator MediaVector::begin()const
 {
+    qDebug()<<"from Iterator begin";
     return paths[0];
 }
 
 MediaVector::Iterator MediaVector::end()const
 {
+    qDebug()<<"from Iterator end: number of elements-1"<< numberOfElements-1;
     return paths[numberOfElements-1];
 }
 
