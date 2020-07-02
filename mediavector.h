@@ -29,7 +29,7 @@ public:
   class Iterator{
 
     private:
-      FileAudio** p;
+      FileAudio* p;
 
     public:
       Iterator(FileAudio* =nullptr);
@@ -45,7 +45,7 @@ public:
   class ConstIterator{
 
     private:
-      FileAudio** p;
+      FileAudio* p;
 
     public:
       ConstIterator();

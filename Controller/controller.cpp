@@ -118,11 +118,11 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
-        //int i=0;
+        int i=0;
 
         MediaVector::Iterator it(file);
 
-        it.print();
+        //it.print();
 
         if(*it == *file){
             qDebug()<<"Star sembra funzionare";
@@ -147,24 +147,25 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             qDebug()<<"Disuguaglianza funziona";
         }
 
-        /*if(m_mediaVector.getSize()!=0)
+        if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<m_mediaVector.getSize();
-            for(MediaVector::Iterator it = m_mediaVector.begin(); it != m_mediaVector[m_mediaVector.getSize()-1]; ++it)
+            for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
             {
                 qDebug()<<"i'm iterating a bit" << i;
-                //qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
+                qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
                     m_mediaVector.push(it->clone());
                     helperFilePath.empty();
                     emit pushUpdateList(it->getTitle());
+                    qDebug()<<"I cloned it!";
                     return;
                 }
                 qDebug()<<"after if";
                 i++;
             }
-        }*/
+        }
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
 
