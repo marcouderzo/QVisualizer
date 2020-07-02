@@ -94,7 +94,8 @@ void MetaDataWidget::onUpdateArtistInWidget(const std::string& a)
 
 void MetaDataWidget::onSetDefaultEvent()
 {
-    title = "No Media Selected.";;
+    title = "No Media Selected.";
+    artist = "";
     coverArt = QImage(QVisualizerLogo);
     update();
 }

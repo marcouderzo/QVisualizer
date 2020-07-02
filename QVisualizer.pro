@@ -38,7 +38,6 @@ SOURCES += \
     Model/timestep.cpp \
     Model/wavfile.cpp \
     Model/mp3file.cpp \
-    Model/aifffile.cpp \
     Model/opusfile.cpp
 
 HEADERS += \
@@ -63,7 +62,6 @@ HEADERS += \
     View/soundwavewidget.h \
     Model/timestep.h \
     Model/wavfile.h \
-    Model/aifffile.h \
     Model/opusfile.h
 
 # Default rules for deployment.

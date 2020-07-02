@@ -155,7 +155,7 @@ signals:
     void sendPalette(float,float,float,float,float,float);
     void changeIncrementSpeed(float, float, float);
     void sendIncrementSpeed(float, float, float);
-    void updateProperties(const std::string&, const std::string&, const std::string&, bool);
+    void updateProperties(std::string, std::string, std::string, bool, std::string, std::string, unsigned int, unsigned int, unsigned int, unsigned int);
 
 public slots:
 

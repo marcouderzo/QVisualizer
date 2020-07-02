@@ -1,6 +1,6 @@
 #include "Model/opusfile.h"
 
-OPUSFile::OPUSFile(const std::string& path): FileAudio (path), artist(""), album(""){}
+OPUSFile::OPUSFile(const std::string& path): FileAudio (path), channelCount(0), samplerate(0){}
 
 
 FileAudio *OPUSFile::clone() const
@@ -8,39 +8,49 @@ FileAudio *OPUSFile::clone() const
     return new OPUSFile(*this);
 }
 
-std::string OPUSFile::getArtist() const
-{
-    return artist;
-}
-
-std::string OPUSFile::getAlbum() const
-{
-    return album;
-}
-
 bool OPUSFile::isLossless() const
 {
     return true;
 }
 
-void OPUSFile::setCoverArt(const QImage & image)
+unsigned int OPUSFile::getSampleRate() const
 {
-    coverArt = image;
+    return samplerate;
 }
 
-QImage OPUSFile::getCoverArt() const
+unsigned int OPUSFile::getChannelCount() const
 {
-    return coverArt;
+    return channelCount;
 }
 
-void OPUSFile::setArtist(const std::string& s)
+void OPUSFile::setSampleRate(unsigned int s)
 {
-    artist=s;
+    samplerate = s;
 }
 
-void OPUSFile::setAlbum(const std::string& s)
+void OPUSFile::setChannelCount(unsigned int cc)
 {
-    album=s;
+    channelCount = cc;
 }
+
+
+
+void OPUSFile::setArtist(const std::string&){}
+void OPUSFile::setAlbum(const std::string&) {}
+void OPUSFile::setGenre(const std::string &) {}
+void OPUSFile::setMood(const std::string &) {}
+void OPUSFile::setYear(unsigned int) {}
+void OPUSFile::setBitrate(unsigned int) {}
+void OPUSFile::setCoverArt(const QImage &){}
+
+std::string OPUSFile::getArtist() const { return ""; }
+std::string OPUSFile::getAlbum() const { return ""; }
+std::string OPUSFile::getGenre() const { return ""; }
+std::string OPUSFile::getMood() const { return ""; }
+unsigned int OPUSFile::getYear() const { return 0; }
+unsigned int OPUSFile::getBitrate() const { return 0; }
+QImage OPUSFile::getCoverArt() const { return QImage(nullptr); }
+
+
 
 

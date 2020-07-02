@@ -36,6 +36,27 @@ void Controller::setId(int b)
     id = b;
 }
 
+void Controller::setView(MainWindow* wi)
+{
+    w = wi;
+    connect(this, SIGNAL(replacePoints(std::vector<double>)), w, SIGNAL(replacePoints(std::vector<double>)));
+    connect(this, SIGNAL(sendHeights(std::vector<double>)), w, SIGNAL(sendHeights(std::vector<double>)));
+    connect(this, SIGNAL(sendRadiuses(std::vector<double>)), w, SIGNAL(sendRadiuses(std::vector<double>)));
+    connect(this, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)), w, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)));
+    connect(this, SIGNAL(pushUpdateList(std::string)), w, SLOT(onPushUpdateList(std::string)));
+    connect(w, SIGNAL(sendToMediaVector(std::string)), this, SLOT(onSendToMediaVector(std::string)));
+    connect(w, SIGNAL(updateOvertimeFFTTimer(unsigned int)), this, SLOT(onUpdateOvertimeFFTTimer(unsigned int)));
+    connect(w, SIGNAL(selectedMediaItem(unsigned int)), this, SLOT(onMediaListItemDoubleClicked(unsigned int)));
+    connect(this, SIGNAL(updateTitleInWidget(std::string)), w, SIGNAL(updateTitleInWidget(std::string)));
+    connect(this, SIGNAL(updateImageInWidget(const QImage&)), w, SIGNAL(updateImageInWidget(const QImage&)));
+    connect(this, SIGNAL(updateCurrentRow(unsigned int)), w, SLOT(onUpdateCurrentRow(unsigned int)));
+    connect(this, SIGNAL(updateOvertimeFFTAlphaBlending(float)), w, SIGNAL(updateOvertimeFFTAlphaBlending(float)));
+    connect(this, SIGNAL(changeIncrementSpeed(float, float, float)), w, SIGNAL(sendIncrementSpeed(float, float, float)));
+    connect(w, SIGNAL(removeMedia(unsigned int)), this, SLOT(onRemoveMediaButtonPressed(unsigned int)));
+    connect(w, SIGNAL(swapMedia(unsigned int)), this, SLOT(onSwapMediaButtonPressed(unsigned int)));
+    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool, std::string, std::string, unsigned int, unsigned int, unsigned int, unsigned int)), w, SIGNAL(updateProperties(std::string, std::string, std::string, bool, std::string, std::string, unsigned int, unsigned int, unsigned int, unsigned int)));
+}
+
 //Credits: Qt examples: https://doc.qt.io/archives/qt-5.6/qtmultimedia-multimedia-audiorecorder-audiorecorder-cpp.html
 qreal Controller::getPeakValue(const QAudioFormat &format)
 {
@@ -79,25 +100,41 @@ qreal Controller::getPeakValue(const QAudioFormat &format)
     return qreal(0);
 }
 
-void Controller::setView(MainWindow* wi)
+void Controller::processBuffer(const QAudioBuffer buffer)
 {
-    w = wi;
-    connect(this, SIGNAL(replacePoints(std::vector<double>)), w, SIGNAL(replacePoints(std::vector<double>)));
-    connect(this, SIGNAL(sendHeights(std::vector<double>)), w, SIGNAL(sendHeights(std::vector<double>)));
-    connect(this, SIGNAL(sendRadiuses(std::vector<double>)), w, SIGNAL(sendRadiuses(std::vector<double>)));
-    connect(this, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)), w, SIGNAL(sendBuffers(std::vector<double>,  std::vector<std::vector<double>>)));
-    connect(this, SIGNAL(pushUpdateList(std::string)), w, SLOT(onPushUpdateList(std::string)));
-    connect(w, SIGNAL(sendToMediaVector(std::string)), this, SLOT(onSendToMediaVector(std::string)));
-    connect(w, SIGNAL(updateOvertimeFFTTimer(unsigned int)), this, SLOT(onUpdateOvertimeFFTTimer(unsigned int)));
-    connect(w, SIGNAL(selectedMediaItem(unsigned int)), this, SLOT(onMediaListItemDoubleClicked(unsigned int)));
-    connect(this, SIGNAL(updateTitleInWidget(std::string)), w, SIGNAL(updateTitleInWidget(std::string)));
-    connect(this, SIGNAL(updateImageInWidget(const QImage&)), w, SIGNAL(updateImageInWidget(const QImage&)));
-    connect(this, SIGNAL(updateCurrentRow(unsigned int)), w, SLOT(onUpdateCurrentRow(unsigned int)));
-    connect(this, SIGNAL(updateOvertimeFFTAlphaBlending(float)), w, SIGNAL(updateOvertimeFFTAlphaBlending(float)));
-    connect(this, SIGNAL(changeIncrementSpeed(float, float, float)), w, SIGNAL(sendIncrementSpeed(float, float, float)));
-    connect(w, SIGNAL(removeMedia(unsigned int)), this, SLOT(onRemoveMediaButtonPressed(unsigned int)));
-    connect(w, SIGNAL(swapMedia(unsigned int)), this, SLOT(onSwapMediaButtonPressed(unsigned int)));
-    connect(this, SIGNAL(updateProperties(std::string, std::string, std::string, bool)), w, SIGNAL(updateProperties(std::string, std::string, std::string, bool)));
+    const qint16* data = buffer.data<qint16>();
+    std::complex<double> aux[buffer.sampleCount()];
+    for(int i=0; i<buffer.sampleCount(); i++)
+    {
+        qreal y = data[i]/getPeakValue(buffer.format());
+        aux[i]=std::complex<double>(y);
+    }
+
+    if(id == 0)
+    {
+        std::vector<double> vect = m_soundWave->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096, 1);
+        emit updateSoundWaveBufferSize(buffer.sampleCount());
+        emit replacePoints(vect);
+    }
+
+    if(id == 1)
+    {
+        std::vector<double> vect=m_FFTBars->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
+        emit sendHeights(vect);
+    }
+
+    if(id == 2)
+    {
+        std::vector<double> vect=m_FFTCircle->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
+        emit sendRadiuses(vect);
+    }
+
+    if(id == 3)
+    {
+       std::vector<double> vect=m_OvertimeFFT->run(aux,static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
+       std::vector<std::vector<double>> b = m_OvertimeFFT->getTimeBuffer();
+       emit sendBuffers(vect, b);
+    }
 }
 
 void Controller::setMetaData(QMediaPlayer::MediaStatus status)
@@ -111,49 +148,19 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             file=new WAVFile(helperFilePath);
         else if(helperFilePath.find(".opus")!= std::string::npos)
             file=new OPUSFile(helperFilePath);
-        else if(helperFilePath.find(".aiff")!= std::string::npos)
-            file= new AIFFFile(helperFilePath);
         else{
             emit formatNotValid();
             return;
         }
 
         int i=0;
-
-        MediaVector::Iterator it(file);
-
-        //it.print();
-
-        if(*it == *file){
-            qDebug()<<"Star sembra funzionare";
-        }
-
-        if(it-> getFilePath() == file-> getFilePath()){
-            qDebug()<<"Freccetta sembra funzionare";
-        }
-
-        FileAudio* file2 = new AIFFFile("");
-
-        MediaVector::Iterator it2(file2);
-
-        if(it == it2){
-            qDebug()<<"Uguaglianza funziona";
-        }
-
-        FileAudio* f = new MP3File("");
-        MediaVector::Iterator it3(f);
-
-        if(it != it3){
-            qDebug()<<"Disuguaglianza funziona";
-        }
-
         if(m_mediaVector.getSize()!=0)
         {
             qDebug()<<m_mediaVector.getSize();
             for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
             {
                 qDebug()<<"i'm iterating a bit" << i;
-                qDebug()<< QString(it->getTitle().c_str())<<QString(it->getAlbum().c_str());
+                qDebug()<< "title:"<<QString(it->getTitle().c_str())<<"album:" << QString(it->getAlbum().c_str());
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
                     m_mediaVector.push(it->clone());
@@ -168,6 +175,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         }
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
+        qDebug()<<availableMetaData;
 
         try
         {
@@ -199,6 +207,24 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 
             if(el==QMediaMetaData::ThumbnailImage)
                 file->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
+
+            if(el==QMediaMetaData::Genre)
+                file->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+
+            if(el==QMediaMetaData::Mood)
+                file->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
+
+            if(el==QMediaMetaData::Year)
+                file->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
+
+            if(el==QMediaMetaData::AudioBitRate)
+                file->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+
+            if(el==QMediaMetaData::SampleRate)
+                file->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+
+            if(el==QMediaMetaData::ChannelCount)
+                file->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
         }
 
         helperFilePath.empty();
@@ -264,7 +290,16 @@ void Controller::onMediaListItemDoubleClicked(unsigned int index)
    emit updateImageInWidget(file->getCoverArt());
    emit updateProgSliderRange(static_cast<int>(file->getDuration()));
 
-   emit updateProperties(file->getTitle(), file->getArtist(), file->getAlbum(), file->isLossless());
+   emit updateProperties(file->getTitle(),
+                         file->getArtist(),
+                         file->getAlbum(),
+                         file->isLossless(),
+                         file->getGenre(),
+                         file->getMood(),
+                         file->getYear(),
+                         file->getBitrate(),
+                         file->getSampleRate(),
+                         file->getChannelCount());
 }
 
 void Controller::onPlayButtonPressed()
@@ -381,39 +416,3 @@ void Controller::onDurationSliderMoved(qint64 s)
     m_QMediaPlayer->setPosition(s*1000);
 }
 
-void Controller::processBuffer(const QAudioBuffer buffer)
-{
-    const qint16* data = buffer.data<qint16>();
-    std::complex<double> aux[buffer.sampleCount()];
-    for(int i=0; i<buffer.sampleCount(); i++)
-    {
-        qreal y = data[i]/getPeakValue(buffer.format());
-        aux[i]=std::complex<double>(y);
-    }
-
-    if(id == 0)
-    {
-        std::vector<double> vect = m_soundWave->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096, 1);
-        emit updateSoundWaveBufferSize(buffer.sampleCount());
-        emit replacePoints(vect);
-    }
-
-    if(id == 1)
-    {
-        std::vector<double> vect=m_FFTBars->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
-        emit sendHeights(vect);
-    }
-
-    if(id == 2)
-    {
-        std::vector<double> vect=m_FFTCircle->run(aux, static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
-        emit sendRadiuses(vect);
-    }
-
-    if(id == 3)
-    {
-       std::vector<double> vect=m_OvertimeFFT->run(aux,static_cast<unsigned int>(buffer.sampleCount()), 4096,1);
-       std::vector<std::vector<double>> b = m_OvertimeFFT->getTimeBuffer();
-       emit sendBuffers(vect, b);
-    }
-}

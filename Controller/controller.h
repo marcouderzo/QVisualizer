@@ -20,7 +20,6 @@
 #include "Model/mp3file.h"
 #include "Model/wavfile.h"
 #include "Model/opusfile.h"
-#include "Model/aifffile.h"
 #include "mediavector.h"
 
 #include "exceptions.h"
@@ -74,7 +73,7 @@ signals:
     void changeIncrementSpeed(float, float, float);
     void updateArtistInWidget(std::string);
     void fileDoesNotExist();
-    void updateProperties(std::string, std::string, std::string, bool);
+    void updateProperties(std::string, std::string, std::string, bool, std::string, std::string, unsigned int, unsigned int, unsigned int, unsigned int);
     void setDefault();
     void durationError();
 
