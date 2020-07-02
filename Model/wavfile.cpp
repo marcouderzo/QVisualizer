@@ -22,14 +22,11 @@ bool WAVFile::isLossless() const
     return true;
 }
 
-void WAVFile::setCoverArt(const QImage & image)
-{
-    coverArt=image;
-}
+void WAVFile::setCoverArt(const QImage & image) {}
 
 QImage WAVFile::getCoverArt() const
 {
-    return coverArt;
+    return QImage(nullptr);
 }
 
 void WAVFile::setArtist(const std::string& s)
