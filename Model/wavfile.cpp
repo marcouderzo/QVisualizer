@@ -81,11 +81,3 @@ void WAVFile::setChannelCount(unsigned int cc)
 {
     channelCount = cc;
 }
-
-
-void WAVFile::setMood(const std::string &){}
-std::string WAVFile::getMood() const { return ""; }
-
-void WAVFile::setCoverArt(const QImage &) {}
-QImage WAVFile::getCoverArt() const { return QImage(nullptr); }
-

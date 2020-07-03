@@ -10,27 +10,21 @@ public:
     virtual FileAudio* clone() const override;
     bool isLossless() const override;
 
-    std::string getArtist() const override;
-    std::string getAlbum() const override;
-    std::string getGenre() const override;
-    unsigned int getYear() const override;
-    unsigned int getBitrate() const override;
-    unsigned int getSampleRate() const override;
-    unsigned int getChannelCount() const override;
+    void setArtist(const std::string&);
+    void setAlbum(const std::string&);
+    void setGenre(const std::string&);
+    void setYear(unsigned int);
+    void setBitrate(unsigned int);
+    void setSampleRate(unsigned int);
+    void setChannelCount(unsigned int);
 
-    void setArtist(const std::string&) override;
-    void setAlbum(const std::string&) override;
-    void setGenre(const std::string&) override;
-    void setYear(unsigned int) override;
-    void setBitrate(unsigned int) override;
-    void setSampleRate(unsigned int) override;
-    void setChannelCount(unsigned int) override;
-
-
-    void setCoverArt(const QImage&) override;
-    QImage getCoverArt() const override;
-    void setMood(const std::string&) override;
-    std::string getMood() const override;
+    std::string getArtist() const;
+    std::string getAlbum() const;
+    std::string getGenre() const;
+    unsigned int getYear() const;
+    unsigned int getBitrate() const;
+    unsigned int getSampleRate() const;
+    unsigned int getChannelCount() const;
 
  private:
     std::string artist;

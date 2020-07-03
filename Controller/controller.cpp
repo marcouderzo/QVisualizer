@@ -153,6 +153,12 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
+
+        //C:/Users/marco/Downloads/Mike Perry  The Ocean ft Shy Martin Official Video.mp3
+        //C:/Users/marco/Downloads/Florence and the Machine - Jenny of Oldstones.mp3
+        //C:/Users/marco/Downloads/Florence and The Machine - Jenny of Oldstones.opus
+        //C:/Users/marco/Downloads/Bob Dylan - Knockin' On Heaven's Door.wav
+
         int i=0;
         if(m_mediaVector.getSize()!=0)
         {
@@ -160,7 +166,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             for(MediaVector::Iterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
             {
                 qDebug()<<"i'm iterating a bit" << i;
-                qDebug()<< "title:"<<QString(it->getTitle().c_str())<<"album:" << QString(it->getAlbum().c_str());
+                //qDebug()<< "title:"<<QString(it->getTitle().c_str())<<"album:" << QString(it->getAlbum().c_str());
                 if(*it == *file){
                     qDebug()<<"Hey that's a clonyclony";
                     m_mediaVector.push(it->clone());

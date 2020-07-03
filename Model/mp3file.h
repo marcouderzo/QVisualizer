@@ -9,25 +9,25 @@ public:
     MP3File(const std::string&);
     virtual FileAudio* clone() const override;
 
-    void setCoverArt(const QImage&) override;
-    void setArtist(const std::string&) override;
-    void setAlbum(const std::string&) override;
-    void setGenre(const std::string&) override;
-    void setMood(const std::string&) override;
-    void setYear(unsigned int) override;
-    void setBitrate(unsigned int) override;
-    void setSampleRate(unsigned int) override;
-    void setChannelCount(unsigned int) override;
+    void setCoverArt(const QImage&);
+    void setArtist(const std::string&);
+    void setAlbum(const std::string&);
+    void setGenre(const std::string&);
+    void setMood(const std::string&);
+    void setYear(unsigned int);
+    void setBitrate(unsigned int);
+    void setSampleRate(unsigned int);
+    void setChannelCount(unsigned int);
 
-    QImage getCoverArt()const override;
-    std::string getArtist() const override;
-    std::string getAlbum() const override;
-    std::string getGenre() const override;
-    std::string getMood() const override;
-    unsigned int getYear() const override;
-    unsigned int getBitrate() const override;
-    unsigned int getSampleRate() const override;
-    unsigned int getChannelCount() const override;
+    QImage getCoverArt()const;
+    std::string getArtist() const;
+    std::string getAlbum() const;
+    std::string getGenre() const;
+    std::string getMood() const;
+    unsigned int getYear() const;
+    unsigned int getBitrate() const;
+    unsigned int getSampleRate() const;
+    unsigned int getChannelCount() const;
 
  private:
     std::string artist;
