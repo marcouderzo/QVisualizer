@@ -470,7 +470,7 @@ void MainWindow::onUpdateCurrentRow(unsigned int index)
 
 void MainWindow::onPositionChanged(qint64 t)
 {
-    progSlider->setValue(t/1000);
+    progSlider->setValue(static_cast<int>(t)/1000);
 }
 
 void MainWindow::onUpdateProgSliderRange(int d)
