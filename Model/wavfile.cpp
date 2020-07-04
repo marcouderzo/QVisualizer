@@ -2,7 +2,7 @@
 
 WAVFile::WAVFile(const std::string& path): FileAudio (path), artist(""), album(""), genre(""), year(0), bitrate(0), samplerate(0), channelCount(0) {}
 
-FileAudio *WAVFile::clone() const
+WAVFile *WAVFile::clone() const
 {
     return new WAVFile(*this);
 }

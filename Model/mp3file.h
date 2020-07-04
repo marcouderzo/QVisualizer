@@ -2,12 +2,14 @@
 #define MP3FILE_H
 
 #include "Model/fileaudio.h"
+#include <QImage>
+
 
 class MP3File: public FileAudio
 {
 public:
     MP3File(const std::string&);
-    virtual FileAudio* clone() const override;
+    virtual MP3File* clone() const override;
 
     void setCoverArt(const QImage&);
     void setArtist(const std::string&);

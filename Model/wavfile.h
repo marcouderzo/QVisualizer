@@ -7,7 +7,7 @@ class WAVFile : public FileAudio
 {
 public:
     WAVFile(const std::string&);
-    virtual FileAudio* clone() const override;
+    virtual WAVFile* clone() const override;
     bool isLossless() const override;
 
     void setArtist(const std::string&);

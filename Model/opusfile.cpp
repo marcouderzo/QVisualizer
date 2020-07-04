@@ -3,7 +3,7 @@
 OPUSFile::OPUSFile(const std::string& path): FileAudio (path), channelCount(0), samplerate(0){}
 
 
-FileAudio *OPUSFile::clone() const
+OPUSFile *OPUSFile::clone() const
 {
     return new OPUSFile(*this);
 }

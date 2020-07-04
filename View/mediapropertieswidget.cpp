@@ -12,7 +12,7 @@ MediaPropertiesWidget::MediaPropertiesWidget()
     QLabel* genreLabel= new QLabel("Genre: ");
     QLabel* moodLabel= new QLabel("Mood: ");
     QLabel* yearLabel= new QLabel("Year: ");
-    QLabel* bitrateLabel= new QLabel("Bitrate: ");
+    QLabel* bitrateLabel= new QLabel("Bitrate (bit): ");
     QLabel* samplerateLabel= new QLabel("Sample Rate: ");
     QLabel* channelcountLabel= new QLabel("Channel(s): ");
 
@@ -70,7 +70,7 @@ void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const s
          m_artist.setText(artist.c_str());
 
      if(album=="")
-         m_album.setText("No Title Available");
+         m_album.setText("No Album Available");
      else
          m_album.setText(album.c_str());
 

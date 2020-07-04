@@ -7,7 +7,7 @@ class OPUSFile: public FileAudio
 {
 public:
     OPUSFile(const std::string&);
-    virtual FileAudio* clone() const override;
+    virtual OPUSFile* clone() const override;
     bool isLossless() const override;
 
     void setSampleRate(unsigned int);

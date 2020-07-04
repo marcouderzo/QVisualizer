@@ -28,7 +28,6 @@ SOURCES += \
     View/filemanagerwidget.cpp \
     main.cpp \
     View/mainwindow.cpp \
-    mediavector.cpp \
     View/metadatawidget.cpp \
     Model/onda.cpp \
     Model/overtimeFFT.cpp \

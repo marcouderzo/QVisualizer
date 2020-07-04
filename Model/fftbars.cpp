@@ -1,5 +1,4 @@
 #include "Model/fftbars.h"
-#include "Model/fftbars.h"
 
 FFTBars::FFTBars()
 {

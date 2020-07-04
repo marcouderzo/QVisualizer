@@ -2,7 +2,6 @@
 #define FILEAUDIO_H
 
 #include <string>
-#include <QImage> //Including QImage in order to save Cover Art MetaData
 
 #include "exceptions.h"
 
