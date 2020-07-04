@@ -193,100 +193,91 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
-
-        for(auto el : availableMetaData)
+        if(MP3File* cFile = dynamic_cast<MP3File*>(file))
         {
-            if(el==QMediaMetaData::Title)
-                file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
-
-            else if(file->getTitle()=="")
+            for(auto el : availableMetaData)
             {
-                auto slashpos = helperFilePath.find_last_of('/');
-                auto dotpos = helperFilePath.find_last_of('.');
-                file->setTitle(helperFilePath.substr(slashpos+1, dotpos-slashpos-1));
+                if(el==QMediaMetaData::Title)
+                    file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
+
+                if(el==QMediaMetaData::Author)
+                        cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+
+                if(el==QMediaMetaData::AlbumTitle)
+                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
+
+                if(el==QMediaMetaData::ThumbnailImage)
+                        cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
+
+                if(el==QMediaMetaData::Genre)
+                        cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+
+                if(el==QMediaMetaData::Mood)
+                        cFile->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
+
+                if(el==QMediaMetaData::Year)
+                        cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
+
+                if(el==QMediaMetaData::AudioBitRate)
+                        cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+
+                if(el==QMediaMetaData::SampleRate)
+                        cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+
+                if(el==QMediaMetaData::ChannelCount)
+                        cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+            }
+        }
+
+        else if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+        {
+            for(auto el : availableMetaData)
+            {
+                if(el==QMediaMetaData::Title)
+                    file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
+
+                if(el==QMediaMetaData::Author)
+                        cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+
+                if(el==QMediaMetaData::AlbumTitle)
+                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
+
+                if(el==QMediaMetaData::Genre)
+                        cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+
+                if(el==QMediaMetaData::Year)
+                        cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
+
+                if(el==QMediaMetaData::AudioBitRate)
+                        cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+
+                if(el==QMediaMetaData::SampleRate)
+                        cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+
+                if(el==QMediaMetaData::ChannelCount)
+                        cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
             }
 
-            if(el==QMediaMetaData::Author)
+
+        }
+
+        else if(OPUSFile* cFile =dynamic_cast<OPUSFile*>(file))
+        {
+            for(auto el : availableMetaData)
             {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+                if(el==QMediaMetaData::SampleRate)
+                        cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
-                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
-                    cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+                if(el==QMediaMetaData::ChannelCount)
+                        cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
             }
+        }
 
-            if(el==QMediaMetaData::AlbumTitle)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
-
-                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
-                    cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
-            }
-
-            if(el==QMediaMetaData::ThumbnailImage)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
-            }
-
-            if(el==QMediaMetaData::Genre)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
-
-                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
-                    cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
-            }
-
-            if(el==QMediaMetaData::Mood)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
-            }
-
-            if(el==QMediaMetaData::Year)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
-
-                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
-                    cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
-            }
-
-            if(el==QMediaMetaData::AudioBitRate)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
-
-                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
-                    cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
-
-            }
-
-            if(el==QMediaMetaData::SampleRate)
-            {
-                if(MP3File* cFile =dynamic_cast<MP3File*>(file))
-                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
-
-                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
-                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
-
-                if(OPUSFile* cFile = dynamic_cast<OPUSFile*>(file))
-                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
-            }
-
-            if(el==QMediaMetaData::ChannelCount)
-            {
-                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
-                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
-
-                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
-                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
-
-                if(OPUSFile* cFile =dynamic_cast<OPUSFile*>(file))
-                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
-            }
+        if(file->getTitle()=="")
+        {
+            auto slashpos = helperFilePath.find_last_of('/');
+            auto dotpos = helperFilePath.find_last_of('.');
+            file->setTitle(helperFilePath.substr(slashpos+1, dotpos-slashpos-1));
         }
 
         helperFilePath.empty();
