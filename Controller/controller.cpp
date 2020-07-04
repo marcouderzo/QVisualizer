@@ -257,8 +257,6 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                 if(el==QMediaMetaData::ChannelCount)
                         cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
             }
-
-
         }
 
         else if(OPUSFile* cFile =dynamic_cast<OPUSFile*>(file))

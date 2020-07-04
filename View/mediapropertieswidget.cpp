@@ -72,7 +72,7 @@ void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const s
      if(album=="")
          m_album.setText("No Title Available");
      else
-         m_album.setText(artist.c_str());
+         m_album.setText(album.c_str());
 
      if(lossless)
          m_lossless.setText("True");

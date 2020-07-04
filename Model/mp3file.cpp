@@ -57,14 +57,14 @@ QImage MP3File::getCoverArt() const
     return coverArt;
 }
 
-void MP3File::setArtist(const std::string& s)
+void MP3File::setArtist(const std::string& art)
 {
-    artist=s;
+    artist=art;
 }
 
-void MP3File::setAlbum(const std::string& s)
+void MP3File::setAlbum(const std::string& alb)
 {
-    album=s;
+    album=alb;
 }
 
 void MP3File::setGenre(const std::string & g)
