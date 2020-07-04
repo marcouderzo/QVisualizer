@@ -193,6 +193,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             return;
         }
 
+
         for(auto el : availableMetaData)
         {
             if(el==QMediaMetaData::Title)
@@ -207,81 +208,84 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 
             if(el==QMediaMetaData::Author)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
 
-                if(dynamic_cast<WAVFile*>(file))
-                    dynamic_cast<WAVFile*>(file)->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+                    cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
             }
 
             if(el==QMediaMetaData::AlbumTitle)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
 
-                if(dynamic_cast<WAVFile*>(file))
-                   dynamic_cast<WAVFile*>(file)->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
+                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+                    cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
             }
 
             if(el==QMediaMetaData::ThumbnailImage)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
             }
 
             if(el==QMediaMetaData::Genre)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
 
-                if(dynamic_cast<WAVFile*>(file))
-                    dynamic_cast<WAVFile*>(file)->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+                    cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
             }
 
             if(el==QMediaMetaData::Mood)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
             }
 
             if(el==QMediaMetaData::Year)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
+
+                if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+                    cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
             }
 
             if(el==QMediaMetaData::AudioBitRate)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
 
-                if(dynamic_cast<WAVFile*>(file))
-                    dynamic_cast<WAVFile*>(file)->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
+                    cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
 
             }
 
             if(el==QMediaMetaData::SampleRate)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+                if(MP3File* cFile =dynamic_cast<MP3File*>(file))
+                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
-                if(dynamic_cast<WAVFile*>(file))
-                    dynamic_cast<WAVFile*>(file)->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
+                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
-                if(dynamic_cast<OPUSFile*>(file))
-                    dynamic_cast<OPUSFile*>(file)->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+                if(OPUSFile* cFile = dynamic_cast<OPUSFile*>(file))
+                    cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
             }
 
             if(el==QMediaMetaData::ChannelCount)
             {
-                if(dynamic_cast<MP3File*>(file))
-                    dynamic_cast<MP3File*>(file)->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+                if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
 
-                if(dynamic_cast<WAVFile*>(file))
-                    dynamic_cast<WAVFile*>(file)->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+                if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
+                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
 
-                if(dynamic_cast<OPUSFile*>(file))
-                    dynamic_cast<OPUSFile*>(file)->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+                if(OPUSFile* cFile =dynamic_cast<OPUSFile*>(file))
+                    cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
             }
         }
 
@@ -345,56 +349,56 @@ void Controller::onMediaListItemDoubleClicked(unsigned int index)
 
    emit updateTitleInWidget(file->getTitle());
 
-   if(dynamic_cast<MP3File*>(file))
-       emit updateArtistInWidget(dynamic_cast<MP3File*>(file)->getArtist());
-   else if(dynamic_cast<WAVFile*>(file))
-       emit updateArtistInWidget(dynamic_cast<WAVFile*>(file)->getArtist());
+   if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+       emit updateArtistInWidget(cFile->getArtist());
+   else if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+       emit updateArtistInWidget(cFile->getArtist());
    else
        emit updateArtistInWidget("");
 
-   if(dynamic_cast<MP3File*>(file))
-       emit updateImageInWidget(dynamic_cast<MP3File*>(file)->getCoverArt());
+   if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+       emit updateImageInWidget(cFile->getCoverArt());
    else
        emit updateImageInWidget(QImage(nullptr));
 
 
    emit updateProgSliderRange(static_cast<int>(file->getDuration()));
 
-   if(dynamic_cast<MP3File*>(file))
-       emit updateProperties(file->getTitle(),
-                             dynamic_cast<MP3File*>(file)->getArtist(),
-                             dynamic_cast<MP3File*>(file)->getAlbum(),
-                             file->isLossless(),
-                             dynamic_cast<MP3File*>(file)->getGenre(),
-                             dynamic_cast<MP3File*>(file)->getMood(),
-                             dynamic_cast<MP3File*>(file)->getYear(),
-                             dynamic_cast<MP3File*>(file)->getBitrate(),
-                             dynamic_cast<MP3File*>(file)->getSampleRate(),
-                             dynamic_cast<MP3File*>(file)->getChannelCount());
+   if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+       emit updateProperties(cFile->getTitle(),
+                             cFile->getArtist(),
+                             cFile->getAlbum(),
+                             cFile->isLossless(),
+                             cFile->getGenre(),
+                             cFile->getMood(),
+                             cFile->getYear(),
+                             cFile->getBitrate(),
+                             cFile->getSampleRate(),
+                             cFile->getChannelCount());
 
-   else if(dynamic_cast<WAVFile*>(file))
-       emit updateProperties(file->getTitle(),
-                             dynamic_cast<WAVFile*>(file)->getArtist(),
-                             dynamic_cast<WAVFile*>(file)->getAlbum(),
-                             file->isLossless(),
-                             dynamic_cast<WAVFile*>(file)->getGenre(),
+   else if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+       emit updateProperties(cFile->getTitle(),
+                             cFile->getArtist(),
+                             cFile->getAlbum(),
+                             cFile->isLossless(),
+                             cFile->getGenre(),
                              "",
-                             dynamic_cast<WAVFile*>(file)->getYear(),
-                             dynamic_cast<WAVFile*>(file)->getBitrate(),
-                             dynamic_cast<WAVFile*>(file)->getSampleRate(),
-                             dynamic_cast<WAVFile*>(file)->getChannelCount());
+                             cFile->getYear(),
+                             cFile->getBitrate(),
+                             cFile->getSampleRate(),
+                             cFile->getChannelCount());
 
-   else if(dynamic_cast<OPUSFile*>(file))
-       emit updateProperties(file->getTitle(),
+   else if(OPUSFile* cFile = dynamic_cast<OPUSFile*>(file))
+       emit updateProperties(cFile->getTitle(),
                              "",
                              "",
-                             file->isLossless(),
+                             cFile->isLossless(),
                              "",
                              "",
                              0,
                              0,
-                             dynamic_cast<OPUSFile*>(file)->getSampleRate(),
-                             dynamic_cast<OPUSFile*>(file)->getChannelCount());
+                             cFile->getSampleRate(),
+                             cFile->getChannelCount());
 }
 
 void Controller::onPlayButtonPressed()
@@ -419,8 +423,8 @@ void Controller::onPrevButtonPressed(unsigned int current)
     m_QMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(file->getFilePath().c_str())));
     emit updateTitleInWidget(file->getTitle());
 
-    if(dynamic_cast<MP3File*>(file))
-        emit updateImageInWidget(dynamic_cast<MP3File*>(file)->getCoverArt());
+    if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+        emit updateImageInWidget(cFile->getCoverArt());
     else
         emit updateImageInWidget(QImage(nullptr));
 
@@ -442,8 +446,8 @@ void Controller::onNextButtonPressed(unsigned int current)
     m_QMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(file->getFilePath().c_str())));
     emit updateTitleInWidget(file->getTitle());
 
-    if(dynamic_cast<MP3File*>(file))
-        emit updateImageInWidget(dynamic_cast<MP3File*>(file)->getCoverArt());
+    if(MP3File* cFile =dynamic_cast<MP3File*>(file))
+        emit updateImageInWidget(cFile->getCoverArt());
     else
         emit updateImageInWidget(QImage(nullptr));
 
