@@ -53,11 +53,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     mediaButtonsLayout = new QHBoxLayout();
 
-    swapButton = new QPushButton("Swap");
     removeButton = new QPushButton("Remove");
     propertiesButton = new QPushButton("Current MetaData");
 
-    mediaButtonsLayout->addWidget(swapButton);
     mediaButtonsLayout->addWidget(removeButton);
     mediaButtonsLayout->addWidget(propertiesButton);
 
@@ -322,7 +320,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(OvertimeFFTStandardTimeSmoothing, SIGNAL(toggled(bool)), this, SLOT(identifyOvertimeFFTSmoothing()));
     connect(OvertimeFFTDynamicFadeTimeSmoothing, SIGNAL(toggled(bool)), this, SLOT(identifyOvertimeFFTSmoothing()));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(onRemoveButtonPressed()));
-    connect(swapButton, SIGNAL(clicked()), this, SLOT(onSwapMediaButtonPressed()));
     connect(applyRGBIncrementButton, SIGNAL(clicked()), this, SLOT(onApplyRGBIncrementButtonClicked()));
     connect(startRedValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
     connect(startGreenValueEdit, SIGNAL(valueChanged(int)), this, SLOT(onPaletteSliderMoved()));
@@ -489,15 +486,6 @@ void MainWindow::onRemoveButtonPressed()
     int index = mediaList->currentRow();
     emit removeMedia(static_cast<unsigned int>(index));
     mediaList->takeItem(index);
-}
-
-void MainWindow::onSwapMediaButtonPressed()
-{
-    if(mediaList->selectedItems().isEmpty()) return;
-    int index = mediaList->currentRow();
-    emit swapMedia(static_cast<unsigned int>(index));
-    QListWidgetItem* toSwap = mediaList->takeItem(index);
-    mediaList->insertItem(index+1, toSwap);
 }
 
 void MainWindow::onPaletteSliderMoved()

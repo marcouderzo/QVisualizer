@@ -3,6 +3,8 @@
 
 #include "Model/fileaudio.h"
 
+#include <QDebug>
+
 template <class T>
 class MediaVector{
 
@@ -23,7 +25,6 @@ public:
 
   void push(T*);
   void pop(unsigned int =0);
-  void swap(unsigned int, unsigned int);
   unsigned int getSize() const;
   unsigned int getCells() const;
 
@@ -95,16 +96,15 @@ unsigned int MediaVector<T>::getSize() const{
 template <class T>
 void MediaVector<T>::pop(unsigned int i){
 
-    if(i >= 0 && i < numberOfElements){
-
-        T* aux = paths + i;
-        for(unsigned int j = i; j < numberOfElements - 1; j++){
-
+if(numberOfElements != 0 && i < numberOfElements)
+    {
+        numberOfElements--;
+        T aux = paths[i];
+        for(unsigned int j = i; j < numberOfElements; j++){
             paths[j] = paths[j + 1];
         }
-        paths[numberOfElements - 1] = nullptr;
+        paths[numberOfElements] = nullptr;
         delete aux;
-        numberOfElements--;
     }
 }
 
@@ -141,13 +141,6 @@ void MediaVector<T>::push(T* t){
     numberOfElements++;
 }
 
-template <class T>
-void MediaVector<T>::swap(unsigned int i, unsigned int j){
-
-    T* aux = paths + i;
-    paths[i] = paths[j];
-    paths[j] = *aux;
-}
 
 template<class T>
 typename MediaVector<T>::ConstIterator MediaVector<T>::begin()const{

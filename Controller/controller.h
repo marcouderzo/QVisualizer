@@ -93,7 +93,6 @@ public slots:
     void onOvertimeFFTAlphaBlendingChanged(int);
     void onVolumeChanged(int);
     void onRemoveMediaButtonPressed(unsigned int);
-    void onSwapMediaButtonPressed(unsigned int);
     void onPaletteChanged(float,float,float,float,float,float);
     void onChangeIncrementSpeed(float, float, float);
     void onFFTCircleSensitivitySliderChanged(int);

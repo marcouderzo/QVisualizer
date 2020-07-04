@@ -1,11 +1,6 @@
 #include "Model/fileaudio.h"
-#include <QDebug>
 
-
-FileAudio::FileAudio(const std::string& path)
-{
-    filePath=path;
-}
+FileAudio::FileAudio(const std::string& path) : filePath(path), title(""), duration(0) {}
 
 std::string FileAudio::getFilePath() const
 {

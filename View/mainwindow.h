@@ -63,7 +63,6 @@ private:
     QSlider* volumeSlider;
 
     QHBoxLayout* mediaButtonsLayout;
-    QPushButton* swapButton;
     QPushButton* removeButton;
     QPushButton* propertiesButton;
 
@@ -151,7 +150,6 @@ signals:
     void updateOvertimeFFTAlphaBlending(float);
     void progSliderPositionChanged(qint64);
     void removeMedia(unsigned int);
-    void swapMedia(unsigned int);
     void sendPalette(float,float,float,float,float,float);
     void changeIncrementSpeed(float, float, float);
     void sendIncrementSpeed(float, float, float);
@@ -175,7 +173,6 @@ public slots:
     void onUpdateProgSliderRange(int);
     void helper_progSliderPositionChanged(int);
     void onRemoveButtonPressed();
-    void onSwapMediaButtonPressed();
     void onPaletteSliderMoved();
     void onApplyRGBIncrementButtonClicked();
     void onFormatNotValid();
