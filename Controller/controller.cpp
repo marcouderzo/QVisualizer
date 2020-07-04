@@ -154,7 +154,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         }
 
 
-        //C:/Users/marco/Downloads/Mike Perry  The Ocean ft Shy Martin Official Video.mp3
+        //C:/Users/marco/Downloads/Florence and the Machine - Jenny of Oldstones.mp3
         //C:/Users/marco/Downloads/Florence and the Machine - Jenny of Oldstones.mp3
         //C:/Users/marco/Downloads/Florence and The Machine - Jenny of Oldstones.opus
         //C:/Users/marco/Downloads/Bob Dylan - Knockin' On Heaven's Door.wav
@@ -162,16 +162,19 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         int i=0;
         if(m_mediaVector.getSize()!=0)
         {
-            qDebug()<<m_mediaVector.getSize();
-            for(MediaVector<FileAudio*>::ConstIterator it = m_mediaVector.begin(); it != ++m_mediaVector.end(); ++it)
+           // qDebug()<<m_mediaVector.getSize();
+            for(MediaVector<FileAudio*>::ConstIterator it = m_mediaVector.begin(); it != m_mediaVector.end(); ++it)
             {
                 qDebug()<<"i'm iterating a bit" << i;
                 //qDebug()<< "title:"<<QString(it->getTitle().c_str())<<"album:" << QString(it->getAlbum().c_str());
                 if(*(*it) == *file){
                     qDebug()<<"Hey that's a clonyclony";
                     FileAudio* auxFile = (*it)->clone();
+                    qDebug()<<"cloned file in aux";
                     m_mediaVector.push(&auxFile);
+                    qDebug()<<"pushed";
                     helperFilePath.empty();
+                    qDebug()<<"emptyed";
                     emit pushUpdateList((*it)->getTitle());
                     qDebug()<<"I cloned it!";
                     return;
@@ -272,12 +275,15 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
             }
         }
 
+        qDebug()<<"before final setTitle";
         if(file->getTitle()=="")
         {
             auto slashpos = helperFilePath.find_last_of('/');
             auto dotpos = helperFilePath.find_last_of('.');
             file->setTitle(helperFilePath.substr(slashpos+1, dotpos-slashpos-1));
         }
+
+        qDebug()<<"after final setTitle";
 
         helperFilePath.empty();
 
