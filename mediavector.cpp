@@ -2,7 +2,7 @@
 #include <QDebug>
 
 using namespace std;
-
+/*
 MediaVector::MediaVector():paths(nullptr), numberOfElements(0), numberOfCells(0){}
 
 MediaVector::~MediaVector()
@@ -160,3 +160,4 @@ bool MediaVector::ConstIterator::operator != (const MediaVector::ConstIterator& 
 {
     return p != cit.p;
 }
+*/

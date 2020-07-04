@@ -42,7 +42,7 @@ private:
     OvertimeFFT* m_OvertimeFFT;
     MainWindow* w;
 
-    MediaVector m_mediaVector;
+    MediaVector<FileAudio*> m_mediaVector;
 
     int id;
 
