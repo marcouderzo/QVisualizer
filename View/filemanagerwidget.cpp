@@ -2,13 +2,10 @@
 #include "Controller/controller.h"
 #include "exceptions.h"
 
-FileManagerWidget::FileManagerWidget()
+FileManagerWidget::FileManagerWidget():importFileButton(new QPushButton("Import File")), layout(new QVBoxLayout()), pathBox(new QLineEdit())
 {
     resize(200, 100);
-    importFileButton=new QPushButton("Import File");
-    layout=new QVBoxLayout();
-    pathBox=new QLineEdit();
-
+    
     layout->addWidget(pathBox);
     layout->addWidget(importFileButton);
 
