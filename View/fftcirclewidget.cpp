@@ -52,7 +52,7 @@ void FFTCircleWidget::paintGL()
 void FFTCircleWidget::onSendRadiusesEvent(const std::vector<double>& radiuses)
 {
     m_radiuses.clear();
-    for(unsigned int i=0; i<2048; i++)
-        m_radiuses.push_back(radiuses[i]);
+    for(auto el : radiuses)
+        m_radiuses.push_back(el);
     update();
 }
