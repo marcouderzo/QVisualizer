@@ -124,6 +124,7 @@ void Controller::processBuffer(const QAudioBuffer buffer)
 
 void Controller::setMetaData(QMediaPlayer::MediaStatus status)
 {
+
     if(status==QMediaPlayer::LoadedMedia)
     {
         FileAudio* file;
@@ -411,6 +412,13 @@ void Controller::onPrevButtonPressed(unsigned int current)
     m_QMediaPlayer->setMedia(QUrl::fromLocalFile(QString::fromUtf8(file->getFilePath().c_str())));
     emit updateTitleInWidget(file->getTitle());
 
+    if(MP3File* cFile =dynamic_cast<MP3File*>(file))
+        emit updateArtistInWidget(cFile->getArtist());
+    else if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
+        emit updateArtistInWidget(cFile->getArtist());
+    else
+        emit updateArtistInWidget("");
+
     if(MP3File* cFile = dynamic_cast<MP3File*>(file))
         emit updateImageInWidget(cFile->getCoverArt());
     else
@@ -418,6 +426,42 @@ void Controller::onPrevButtonPressed(unsigned int current)
 
     emit updateProgSliderRange(static_cast<int>(file->getDuration()));
     emit updateCurrentRow(current-1);
+
+    if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              cFile->getArtist(),
+                              cFile->getAlbum(),
+                              cFile->isLossless(),
+                              cFile->getGenre(),
+                              cFile->getMood(),
+                              cFile->getYear(),
+                              cFile->getBitrate(),
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
+
+    else if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              cFile->getArtist(),
+                              cFile->getAlbum(),
+                              cFile->isLossless(),
+                              cFile->getGenre(),
+                              "",
+                              cFile->getYear(),
+                              cFile->getBitrate(),
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
+
+    else if(OPUSFile* cFile = dynamic_cast<OPUSFile*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              "",
+                              "",
+                              cFile->isLossless(),
+                              "",
+                              "",
+                              0,
+                              0,
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
 
     m_QMediaPlayer->play();
 }
@@ -435,12 +479,55 @@ void Controller::onNextButtonPressed(unsigned int current)
     emit updateTitleInWidget(file->getTitle());
 
     if(MP3File* cFile =dynamic_cast<MP3File*>(file))
+        emit updateArtistInWidget(cFile->getArtist());
+    else if(WAVFile* cFile =dynamic_cast<WAVFile*>(file))
+        emit updateArtistInWidget(cFile->getArtist());
+    else
+        emit updateArtistInWidget("");
+
+    if(MP3File* cFile =dynamic_cast<MP3File*>(file))
         emit updateImageInWidget(cFile->getCoverArt());
     else
         emit updateImageInWidget(QImage(nullptr));
 
     emit updateProgSliderRange(static_cast<int>(file->getDuration()));
     emit updateCurrentRow(current+1);
+
+    if(MP3File* cFile = dynamic_cast<MP3File*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              cFile->getArtist(),
+                              cFile->getAlbum(),
+                              cFile->isLossless(),
+                              cFile->getGenre(),
+                              cFile->getMood(),
+                              cFile->getYear(),
+                              cFile->getBitrate(),
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
+
+    else if(WAVFile* cFile = dynamic_cast<WAVFile*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              cFile->getArtist(),
+                              cFile->getAlbum(),
+                              cFile->isLossless(),
+                              cFile->getGenre(),
+                              "",
+                              cFile->getYear(),
+                              cFile->getBitrate(),
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
+
+    else if(OPUSFile* cFile = dynamic_cast<OPUSFile*>(file))
+        emit updateProperties(cFile->getTitle(),
+                              "",
+                              "",
+                              cFile->isLossless(),
+                              "",
+                              "",
+                              0,
+                              0,
+                              cFile->getSampleRate(),
+                              cFile->getChannelCount());
 
     m_QMediaPlayer->play();
 }

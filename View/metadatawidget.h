@@ -32,7 +32,6 @@ private:
     QImage coverArt;
     std::string title;
     std::string artist;
-    QRect targetRect;
     QRect titleRect;
     QPainter* painter;
 };

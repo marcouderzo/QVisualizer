@@ -1,6 +1,6 @@
 #include "View/metadatawidget.h"
 
-MetaDataWidget::MetaDataWidget():painter(new QPainter()), coverArt(QImage(QVisualizerLogo)), title("Welcome to QVisualizer!"), artist(""){}
+MetaDataWidget::MetaDataWidget():coverArt(QImage(QVisualizerLogo)), title("Welcome to QVisualizer!"), artist(""), painter(new QPainter()){}
 
 void MetaDataWidget::initializeGL()
 {
@@ -81,8 +81,7 @@ void MetaDataWidget::onUpdateImageInWidget(const QImage & image)
 
 void MetaDataWidget::onUpdateArtistInWidget(const std::string& a)
 {
-    if(a!="")
-        artist=a;
+    artist=a;
     update();
 }
 

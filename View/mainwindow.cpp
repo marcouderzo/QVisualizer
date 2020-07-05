@@ -1,7 +1,7 @@
 #include "View/mainwindow.h"
 #include "Controller/controller.h"
 
-MainWindow::MainWindow(QWidget *parent):m_soundWaveWidget(new SoundWaveWidget()), m_FFTBarsWidget(new FFTBarsWidget()), m_FFTCircleWidget(new FFTCircleWidget()), m_OvertimeFFTWidget(new OvertimeFFTWidget()), m_MetaDataWidget(new MetaDataWidget()), m_FileManagerWidget(new FileManagerWidget()), m_MediaPropertiesWidget(new MediaPropertiesWidget())
+MainWindow::MainWindow(QWidget *parent):m_soundWaveWidget(new SoundWaveWidget()), m_FFTBarsWidget(new FFTBarsWidget()), m_OvertimeFFTWidget(new OvertimeFFTWidget()), m_FFTCircleWidget(new FFTCircleWidget()), m_MetaDataWidget(new MetaDataWidget()), m_FileManagerWidget(new FileManagerWidget()), m_MediaPropertiesWidget(new MediaPropertiesWidget())
 {
     setMinimumSize(1600,850);
     

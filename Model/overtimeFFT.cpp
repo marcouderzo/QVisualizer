@@ -1,6 +1,6 @@
 #include "Model/overtimeFFT.h"
 
-OvertimeFFT::OvertimeFFT():smoothin(0), smoothLimit(0){}
+OvertimeFFT::OvertimeFFT():smoothing(0), smoothLimit(0){}
 
 void OvertimeFFT::tick(std::vector<double> vect)
 {
