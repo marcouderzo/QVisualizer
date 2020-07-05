@@ -468,11 +468,6 @@ void Controller::onVolumeChanged(int volume)
     m_QMediaPlayer->setVolume(volume);
 }
 
-//C:/Users/marco/Downloads/Florence and the Machine - Jenny of Oldstones.mp3
-//C:/Users/marco/Downloads/Florence and the Machine - Jenny of Oldstones.mp3
-//C:/Users/marco/Downloads/Florence and The Machine - Jenny of Oldstones.opus
-//C:/Users/marco/Downloads/Bob Dylan - Knockin' On Heaven's Door.wav
-
 void Controller::onRemoveMediaButtonPressed(unsigned int index)
 {
     if(m_mediaVector.getSize() == 0 ) return;
