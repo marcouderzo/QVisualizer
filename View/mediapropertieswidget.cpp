@@ -84,8 +84,14 @@ void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const s
      else
          m_genre.setText(genre.c_str());
 
-     if(mood=="")
-         m_mood.setText("No Mood Available");
+     if(mood==""){
+        #ifdef Q_OS_UNIX
+            m_mood.setText("Not avalilable on Unix");
+        #endif
+        #ifdef Q_OS_WIN
+             m_mood.setText("No Mood Available");
+        #endif
+     }
      else
          m_mood.setText(mood.c_str());
 
@@ -95,17 +101,36 @@ void MediaPropertiesWidget::onUpdateProperties(const std::string& title, const s
          m_year.setText(QString::number(year));
 
      if(bitrate==0)
-         m_bitrate.setText("No Bitrate Available");
+     {
+        #ifdef Q_OS_UNIX
+            m_bitrate.setText("Not avalilable on Unix");
+        #endif
+        #ifdef Q_OS_WIN
+             m_bitrate.setText("No Bitrate Available");
+        #endif
+     }
      else
          m_bitrate.setText(QString::number(bitrate));
 
-     if(samplerate==0)
-         m_samplerate.setText("No Sample Rate Available");
+     if(samplerate==0){
+        #ifdef Q_OS_UNIX
+            m_samplerate.setText("Not avalilable on Unix");
+        #endif
+        #ifdef Q_OS_WIN
+             m_samplerate.setText("No Sample Rate Available");
+        #endif
+     }
      else
          m_samplerate.setText(QString::number(samplerate));
 
-     if(channelcount==0)
-         m_channelcount.setText("No Channel(s) Available");
+     if(channelcount==0){
+        #ifdef Q_OS_UNIX
+            m_channelcount.setText("Not avalilable on Unix");
+        #endif
+        #ifdef Q_OS_WIN
+             m_channelcount.setText("No Channel(s) Available");
+        #endif
+     }
      else
          m_channelcount.setText(QString::number(channelcount));
 }

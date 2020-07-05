@@ -167,7 +167,7 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         }
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
-
+        qDebug()<<availableMetaData;
         try
         {
             file->setDuration(auxMediaPlayer->duration());
@@ -182,35 +182,49 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         {
             for(auto el : availableMetaData)
             {
+                //Metadati comuni di mp3
                 if(el==QMediaMetaData::Title)
                     file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
-
-                if(el==QMediaMetaData::Author)
-                        cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
-
-                if(el==QMediaMetaData::AlbumTitle)
-                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
-
-                if(el==QMediaMetaData::ThumbnailImage)
-                        cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
-
-                if(el==QMediaMetaData::Genre)
-                        cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
-
-                if(el==QMediaMetaData::Mood)
-                        cFile->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
 
                 if(el==QMediaMetaData::Year)
                         cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
 
-                if(el==QMediaMetaData::AudioBitRate)
+                if(el==QMediaMetaData::Genre)
+                        cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
+
+                if(el==QMediaMetaData::AlbumTitle)
+                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
+
+
+                #ifdef Q_OS_WIN
+
+                    if(el==QMediaMetaData::Author)
+                        cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+
+                    if(el==QMediaMetaData::ThumbnailImage)
+                        cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::ThumbnailImage).value<QImage>());
+
+                    if(el==QMediaMetaData::Mood)
+                        cFile->setMood(auxMediaPlayer->metaData(QMediaMetaData::Mood).toString().toStdString());
+
+                    if(el==QMediaMetaData::AudioBitRate)
                         cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
 
-                if(el==QMediaMetaData::SampleRate)
+                    if(el==QMediaMetaData::SampleRate)
                         cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
-                if(el==QMediaMetaData::ChannelCount)
+                    if(el==QMediaMetaData::ChannelCount)
                         cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+
+                #endif
+
+                #ifdef Q_OS_UNIX
+                    if(el==QMediaMetaData::AlbumArtist)
+                            cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::AlbumArtist).toString().toStdString());
+
+                    if(el==QMediaMetaData::CoverArtImage)
+                            cFile->setCoverArt(auxMediaPlayer->metaData(QMediaMetaData::CoverArtImage).value<QImage>());
+                #endif
             }
         }
 
@@ -218,14 +232,9 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         {
             for(auto el : availableMetaData)
             {
+                //
                 if(el==QMediaMetaData::Title)
                     file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
-
-                if(el==QMediaMetaData::Author)
-                        cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
-
-                if(el==QMediaMetaData::AlbumTitle)
-                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
 
                 if(el==QMediaMetaData::Genre)
                         cFile->setGenre(auxMediaPlayer->metaData(QMediaMetaData::Genre).toString().toStdString());
@@ -233,14 +242,31 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
                 if(el==QMediaMetaData::Year)
                         cFile->setYear(auxMediaPlayer->metaData(QMediaMetaData::Year).toUInt());
 
-                if(el==QMediaMetaData::AudioBitRate)
-                        cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+                if(el==QMediaMetaData::AlbumTitle)
+                        cFile->setAlbum(auxMediaPlayer->metaData(QMediaMetaData::AlbumTitle).toString().toStdString());
 
-                if(el==QMediaMetaData::SampleRate)
-                        cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
-                if(el==QMediaMetaData::ChannelCount)
-                        cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+
+                #ifdef Q_OS_WIN
+
+                    if(el==QMediaMetaData::Author)
+                            cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::Author).toString().toStdString());
+
+                    if(el==QMediaMetaData::AudioBitRate)
+                            cFile->setBitrate(auxMediaPlayer->metaData(QMediaMetaData::AudioBitRate).toUInt());
+
+                    if(el==QMediaMetaData::SampleRate)
+                            cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
+
+                    if(el==QMediaMetaData::ChannelCount)
+                            cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+
+                #endif
+
+                #ifdef Q_OS_UNIX
+                    if(el==QMediaMetaData::AlbumArtist)
+                            cFile->setArtist(auxMediaPlayer->metaData(QMediaMetaData::AlbumArtist).toString().toStdString());
+                #endif
             }
         }
 
@@ -248,11 +274,14 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         {
             for(auto el : availableMetaData)
             {
+                #ifdef Q_OS_WIN
                 if(el==QMediaMetaData::SampleRate)
                         cFile->setSampleRate(auxMediaPlayer->metaData(QMediaMetaData::SampleRate).toUInt());
 
                 if(el==QMediaMetaData::ChannelCount)
                         cFile->setChannelCount(auxMediaPlayer->metaData(QMediaMetaData::ChannelCount).toUInt());
+
+                #endif
             }
         }
 
