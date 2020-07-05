@@ -1,29 +1,23 @@
 #include "View/mainwindow.h"
 #include "Controller/controller.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent):m_soundWaveWidget(new SoundWaveWidget()), m_FFTBarsWidget(new FFTBarsWidget()), m_FFTCircleWidget(new FFTCircleWidget()), m_OvertimeFFTWidget(new OvertimeFFTWidget()), m_MetaDataWidget(new MetaDataWidget()), m_FileManagerWidget(new FileManagerWidget()), m_MediaPropertiesWidget(new MediaPropertiesWidget())
 {
     setMinimumSize(1600,850);
-    m_soundWaveWidget = new SoundWaveWidget();
+    
     m_soundWaveWidget->setMinimumSize(QSize(400,300));
-
-    m_FFTBarsWidget=new FFTBarsWidget();
+    
     m_FFTBarsWidget->setMinimumSize(QSize(400,300));
 
-    m_FFTCircleWidget = new FFTCircleWidget();
     m_FFTCircleWidget->setMinimumSize(QSize(400,300));
 
-    m_OvertimeFFTWidget = new OvertimeFFTWidget();
     m_OvertimeFFTWidget->setMinimumSize(QSize(400,300));
 
-    m_MetaDataWidget = new MetaDataWidget();
+    
     m_MetaDataWidget->setMinimumSize(QSize(400,200));
 
-
-    m_FileManagerWidget = new FileManagerWidget();
     m_FileManagerWidget->setController(c);
-
-    m_MediaPropertiesWidget = new MediaPropertiesWidget();
+    
     m_MediaPropertiesWidget->setController(c);
     m_MediaPropertiesWidget->hide();
 
