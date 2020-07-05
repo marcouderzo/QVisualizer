@@ -1,10 +1,8 @@
 #include "View/fftcirclewidget.h"
 
-FFTCircleWidget::FFTCircleWidget()
+FFTCircleWidget::FFTCircleWidget():painter(new QPainter()), pen(new QPen())
 {
-    m_radiuses.reserve(2048);
-    painter = new QPainter();
-    pen = new QPen();
+    m_radiuses.reserve(32);
 }
 
 void FFTCircleWidget::initializeGL()
