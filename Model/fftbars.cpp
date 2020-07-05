@@ -1,10 +1,6 @@
 #include "Model/fftbars.h"
 
-FFTBars::FFTBars()
-{
-    sensitivity=500;
-    smoothing=1;
-}
+FFTBars::FFTBars():sensitivity(500), smoothing(1){}
 
 void FFTBars::setSensitivity(int amt)
 {
