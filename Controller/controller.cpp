@@ -165,7 +165,6 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         }
 
         const QStringList availableMetaData = auxMediaPlayer->availableMetaData();
-        qDebug()<<availableMetaData;
         try
         {
             file->setDuration(auxMediaPlayer->duration());
