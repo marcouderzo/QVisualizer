@@ -1,24 +1,9 @@
 #include "View/overtimefftwidget.h"
 
-OvertimeFFTWidget::OvertimeFFTWidget()
+OvertimeFFTWidget::OvertimeFFTWidget():r_start(0.7f), g_start(0.7f), b_start(1.0f), r_end(0.0f), g_end(0.5f), b_end(1.0f), r_increment(0.01f), g_increment(0.01f), b_increment(0.01f), alphaBlending(0.17f)
 {
     m_heights.reserve(100);
     for(unsigned long long i=0; i<100; i++) m_heights[i]=0;
-
-    r_start = 0.7f;
-    g_start = 0.7f;
-    b_start = 1.0f;
-
-    r_end = 0.0f;
-    g_end = 0.5f;
-    b_end = 1.0f;
-
-    r_increment = 0.01f;
-    g_increment = 0.01f;
-    b_increment = 0.01f;
-
-
-    alphaBlending=0.17f;
 }
 
 void OvertimeFFTWidget::initializeGL()
