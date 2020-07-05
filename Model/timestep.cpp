@@ -1,9 +1,6 @@
 #include "Model/timestep.h"
 
-TimeStep::TimeStep()
-{
-    ms=0;
-}
+TimeStep::TimeStep():ms(0){}
 
 void TimeStep::setTimeStep(unsigned int i)
 {
