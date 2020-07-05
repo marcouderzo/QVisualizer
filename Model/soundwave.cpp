@@ -1,9 +1,6 @@
 #include "Model/soundwave.h"
 
-SoundWave::SoundWave()
-{
-    remapFactor=1;
-}
+SoundWave::SoundWave():remapFactor(1){}
 
 void SoundWave::setRemapFactor(int f)
 {
