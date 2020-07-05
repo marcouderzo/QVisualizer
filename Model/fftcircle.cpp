@@ -1,9 +1,6 @@
 #include "Model/fftcircle.h"
 
-FFTCircle::FFTCircle()
-{
-    sensitivity=300;
-}
+FFTCircle::FFTCircle():sensitivity(300){}
 
 void FFTCircle::remapFFT(const std::vector<double> &freq, double oldBeg, double oldEnd, double newBeg, double newEnd)
 {
