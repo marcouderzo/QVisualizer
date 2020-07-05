@@ -46,7 +46,6 @@ void OvertimeFFTWidget::paintGL()
     GLdouble t_xOffset=0.01;
     GLdouble yOffset=0.01;
 
-    //Start Color
     GLfloat r=r_start;
     GLfloat g=g_start;
     GLfloat b=b_start;
