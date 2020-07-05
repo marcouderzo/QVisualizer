@@ -1,8 +1,6 @@
 #include "Controller/controller.h"
 #include "View/mainwindow.h"
 
-#include <QDebug>
-
 Controller::Controller()
 {    
     m_QMediaPlayer = new QMediaPlayer();
