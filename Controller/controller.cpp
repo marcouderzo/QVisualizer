@@ -179,7 +179,6 @@ void Controller::setMetaData(QMediaPlayer::MediaStatus status)
         {
             for(auto el : availableMetaData)
             {
-                //Metadati comuni di mp3
                 if(el==QMediaMetaData::Title)
                     file->setTitle(auxMediaPlayer->metaData(QMediaMetaData::Title).toString().toStdString());
 
