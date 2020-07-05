@@ -1,12 +1,6 @@
 #include "View/metadatawidget.h"
 
-MetaDataWidget::MetaDataWidget()
-{
-    painter = new QPainter();
-    coverArt =  QImage(QVisualizerLogo);
-    title = "Welcome to QVisualizer!";
-    artist = "";
-}
+MetaDataWidget::MetaDataWidget():painter(new QPainter()), coverArt(QImage(QVisualizerLogo)), title("Welcome to QVisualizer!"), artist(""){}
 
 void MetaDataWidget::initializeGL()
 {
