@@ -1,14 +1,9 @@
 #include "Controller/controller.h"
 #include "View/mainwindow.h"
 
-Controller::Controller()
+Controller::Controller():m_QMediaPlayer(new QMediaPlayer()), m_QAudioProbe(new QAudioProbe()), auxMediaPlayer(new QMediaPlayer()), m_soundWave(new SoundWave()), m_FFTBars(new FFTBars()), m_FFTCircle(new FFTCircle()), m_OvertimeFFT(new OvertimeFFT()), id(-1)
 {    
-    m_QMediaPlayer = new QMediaPlayer();
-    m_QAudioProbe = new QAudioProbe();
-
     m_QMediaPlayer->setVolume(60);
-
-    auxMediaPlayer = new QMediaPlayer();
 
     m_QAudioProbe->setSource(m_QMediaPlayer);
 
@@ -18,13 +13,6 @@ Controller::Controller()
 
     connect(m_QMediaPlayer, SIGNAL(positionChanged(qint64)), this, SIGNAL(positionChanged(qint64)));
     connect(this, SIGNAL(progSliderPositionChanged(qint64)), this, SLOT(onDurationSliderMoved(qint64)));
-
-    m_soundWave = new SoundWave();
-    m_FFTBars = new FFTBars();
-    m_FFTCircle = new FFTCircle();
-    m_OvertimeFFT = new OvertimeFFT();
-
-    id = -1;
 
     m_OvertimeFFT->setTimeStep(10);
 }
