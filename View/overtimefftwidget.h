@@ -6,9 +6,6 @@ class OvertimeFFTWidget: public QOpenGLWidget, protected QOpenGLFunctions
 {
 Q_OBJECT
 public:
-    std::chrono::steady_clock::time_point beginchrono;
-    std::chrono::steady_clock::time_point endchrono;
-
     OvertimeFFTWidget();
 
 protected:
