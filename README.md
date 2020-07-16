@@ -20,6 +20,12 @@ QVisualizer is a desktop app for Real Time Music Visualization. It is written in
 ### Requirements
 - Qt 5.13.0 or later 
 
+### How To Compile
+- Open Terminal
+- Navigate to Folder
+- Type `qmake QVisualizer.pro` and press Enter
+- Type `make` and press Enter
+
 ### Building in Windows
 You might need to add to the .pro file the following line of code ` LIBS     += -lopengl32 -lglu32`.
 
