@@ -3,9 +3,9 @@
 [![Generic badge](https://img.shields.io/badge/Windows_Build-Passing-COLOR.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Linux_Build-Passing-COLOR.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Using-Qt_Framework-BLUE.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Using-Qt_OpenGL-COLOR.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Using-Qt_OpenGL-BLUE.svg)](https://shields.io/)
 
-
+![QVisualizerLogo](https://github.com/marcouderzo/QVisualizer/blob/masterbranch/resources/QVisualizer-white.jpg)
 
 Repository del Progetto del corso di Programmazione ad Oggetti @ Università degli Studi di Padova. 
 
