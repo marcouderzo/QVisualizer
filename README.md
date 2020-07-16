@@ -2,6 +2,7 @@
 
 [![Generic badge](https://img.shields.io/badge/Windows_Build-Passing-COLOR.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Linux_Build-Passing-COLOR.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Using-Qt_Framework-BLUE.svg)](https://shields.io/)
 
 
 Repository del Progetto del corso di Programmazione ad Oggetti @ Università degli Studi di Padova. 
@@ -15,13 +16,16 @@ Sviluppato da:
 QVisualizer is a desktop app for Real Time Music Visualization. It is written in C++ using the Qt Framework and its OpenGL library.
 
 ### Requirements
-- Qt 5.13.0 or later
+- Qt 5.13.0 or later 
 
 ### Building in Windows
 You might need to add to the .pro file the following line of code ` LIBS     += -lopengl32 -lglu32`.
 
 ### Notes
 QVisualizer was developed to run natively in Ubuntu. Windows is also supported, but Qt's audio buffers have a quite strange behaviour in Windows: they randomly change size. Thus, it might not run smoothly or might not run at all. In a further update direct SoundCard input support will be added and that should fix it.
+
+### Updates
+QVisualizer will get updates in order to improve it, following the teacher's feedback.
 
 ## For UniPD Students (ITALIAN)
 
