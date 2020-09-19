@@ -2,7 +2,7 @@
 
 [![Generic badge](https://img.shields.io/badge/Windows_Build-Passing-COLOR.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Linux_Build-Passing-COLOR.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Using-Qt_Framework-BLUE.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Using-Qt-BLUE.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Using-Qt_OpenGL-BLUE.svg)](https://shields.io/)
 
 ![QVisualizerLogo](https://github.com/marcouderzo/QVisualizer/blob/masterbranch/resources/QVisualizer-white.jpg)
@@ -15,7 +15,7 @@ Sviluppato da:
 
 ## Introduction
 
-QVisualizer is a desktop app for Real Time Music Visualization. It is written in C++ using the Qt Framework and its OpenGL library.
+QVisualizer is a desktop app for Real Time Music Visualization. It is written in C++ using the Qt Library and OpenGL.
 
 ### Requirements
 - Qt 5.13.0 or later 
