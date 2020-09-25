@@ -15,7 +15,7 @@ Sviluppato da:
 
 ## Introduction
 
-QVisualizer is a desktop app for Real Time Music Visualization. It is written in C++ using the Qt Library and OpenGL.
+QVisualizer is a desktop app for Real Time Music Visualization. It is written in C++ using Qt Library and OpenGL.
 
 ### Requirements
 - Qt 5.13.0 or later 
@@ -26,14 +26,19 @@ QVisualizer is a desktop app for Real Time Music Visualization. It is written in
 - Type `qmake QVisualizer.pro` and press Enter
 - Type `make` and press Enter
 
-### Building in Windows
-You might need to add to the .pro file the following line of code ` LIBS     += -lopengl32 -lglu32`.
-
 ### Notes
-QVisualizer was developed to run natively in Ubuntu. Windows is also supported, but Qt's audio buffers have a quite strange behaviour in Windows: they randomly change size. Thus, it might not run smoothly or might not run at all. In a further update direct SoundCard input support will be added and that should fix it.
+QVisualizer was developed to run natively in Ubuntu. Windows is also supported, but Qt's audio buffers have a quite strange behaviour in Windows: they randomly change size. That is dependent on the implementation that Qt developers decided to go with. To avoid any stability and compatibility issues, in this case QVisualizer will fetch the audio buffers from the soundcard. Thus, make sure you enable Stereo Mix.
 
-### Updates
-QVisualizer will get updates in order to improve it, following the teacher's feedback.
+## Updates
+
+### Version 1.0
+As it was submitted to the teacher.
+
+### Version 1.1
+- Improved compatibility on Windows: now using QAudioRecorder on Windows Implementation. Stereo Mix enabled is required.
+- Added -Windows Only- Feature: audio is fetched from SoundCard, thus QVisualizer picks up the audio regardless of the app you are listening through.
+- Improved User Experience: added QFileDialog for easier file selection.
+
 
 ## For UniPD Students (ITALIAN)
 
@@ -42,5 +47,3 @@ Abbiamo deciso di condividere liberamente e totalmente il nostro progetto in mod
 
 ### Per la Macchina di Laboratorio 
 La macchina virtuale di laboratorio fornitaci era sprovvista di alcuni moduli Qt. Per installarli, lanciare da terminale il comando `sudo apt install qtmultimedia5-dev libqt5multimedia5-plugins`.
-
-
