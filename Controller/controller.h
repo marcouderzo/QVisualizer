@@ -34,6 +34,8 @@ private:
     QMediaPlayer* m_QMediaPlayer;
     QAudioProbe* m_QAudioProbe;
 
+    QAudioRecorder* m_QAudioRecorder;
+
     QMediaPlayer* auxMediaPlayer;
 
     SoundWave* m_soundWave;

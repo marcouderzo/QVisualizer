@@ -9,10 +9,10 @@ void MetaDataWidget::initializeGL()
 
 void MetaDataWidget::resizeGL(int w, int h)
 {
-    glViewport(0, 0, w, h);
+    glViewport(0, 0, w, h); // Firstly, the window may have been resized so re-create the viewing area
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();  // Reset the projection matrix, or bad things happen after multiple calls to below functions!
+    glMatrixMode(GL_MODELVIEW); // Tell OpenGL to manipulate the correct matrix stack
     glLoadIdentity();
 }
 

@@ -5,7 +5,8 @@
 #include <QPushButton>
 #include <QListWidget>
 #include <QVBoxLayout>
-#include <QLineEdit>
+#include <QLabel>
+#include <QFileDialog>
 
 class Controller;
 
@@ -17,9 +18,12 @@ public:
     void setController(Controller*);
 private:
     Controller* ctrl;
+    QFileDialog* fileDialog;
     QPushButton* importFileButton;
-    QLineEdit* pathBox;
+    QPushButton* showDialogButton;
+    QLabel* filenameLabel;
     QVBoxLayout* layout;
+    std::string m_file;
 
 signals:
     void sendToMediaVector(const std::string&);
@@ -27,6 +31,7 @@ signals:
 
 public slots:
     void onImportFileButtonPressed();
+    void onSelectNewFileButtonPressed();
 
 };
 

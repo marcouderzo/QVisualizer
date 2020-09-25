@@ -1,11 +1,27 @@
 #include "Controller/controller.h"
 #include "View/mainwindow.h"
 
-Controller::Controller():m_QMediaPlayer(new QMediaPlayer()), m_QAudioProbe(new QAudioProbe()), auxMediaPlayer(new QMediaPlayer()), m_soundWave(new SoundWave()), m_FFTBars(new FFTBars()), m_FFTCircle(new FFTCircle()), m_OvertimeFFT(new OvertimeFFT()), id(-1)
+Controller::Controller():m_QMediaPlayer(new QMediaPlayer()), m_QAudioProbe(new QAudioProbe()), m_QAudioRecorder(new QAudioRecorder()), auxMediaPlayer(new QMediaPlayer()), m_soundWave(new SoundWave()), m_FFTBars(new FFTBars()), m_FFTCircle(new FFTCircle()), m_OvertimeFFT(new OvertimeFFT()), id(-1)
 {    
     m_QMediaPlayer->setVolume(60);
 
+#ifdef Q_OS_WIN
+    m_QAudioRecorder->setAudioInput("Stereo Mix (Realtek High Definition Audio)");
+
+    QAudioEncoderSettings settings;
+    settings.setCodec("audio/pcm");
+    settings.setSampleRate(8000);
+    settings.setBitRate(128000);
+    settings.setQuality(QMultimedia::VeryHighQuality);
+
+    m_QAudioRecorder->setEncodingSettings(settings);
+    m_QAudioRecorder->record();
+    m_QAudioProbe->setSource(m_QAudioRecorder);
+#endif
+
+#ifdef Q_OS_UNIX
     m_QAudioProbe->setSource(m_QMediaPlayer);
+#endif
 
     connect(m_QAudioProbe, SIGNAL(audioBufferProbed(QAudioBuffer)), this, SLOT(processBuffer(QAudioBuffer)));
 

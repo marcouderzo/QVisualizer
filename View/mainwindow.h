@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QButtonGroup>
+#include <QLineEdit>
 
 #include "soundwavewidget.h"
 #include "fftbarswidget.h"
