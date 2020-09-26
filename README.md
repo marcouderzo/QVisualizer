@@ -36,7 +36,7 @@ As it was submitted to the teacher.
 
 ### Version 1.1
 - Improved compatibility on Windows: now using QAudioRecorder on Windows Implementation. Stereo Mix enabled is required.
-- Added -Windows Only- Feature: audio is fetched from SoundCard, thus QVisualizer picks up the audio regardless of the app you are listening through.
+- Added -Windows Only- Feature: audio is fetched from SoundCard, thus QVisualizer picks up the audio regardless of the app you are listening music with.
 - Improved User Experience: added QFileDialog for easier file selection.
 
 
